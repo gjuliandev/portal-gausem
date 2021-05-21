@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { IUsuario } from 'src/app/interfaces/usuario';
+import { Subscription } from 'rxjs';
+import { UsuarioService } from 'src/app/providers/usuarios/usuario.service';
 @Component({
   selector: 'app-horizontal-header',
   templateUrl: './horizontal-header.component.html',
   styleUrls: []
 })
-export class HorizontalAppHeaderComponent {
+export class HorizontalAppHeaderComponent implements OnDestroy{
   public config: PerfectScrollbarConfigInterface = {};
 
 
@@ -103,14 +107,44 @@ export class HorizontalAppHeaderComponent {
     icon: 'de'
   }]
 
+  usuario: IUsuario = { nombre: '', password: '', email: '', role: '', avatar: ''};
+  usuarioEventSubscription: Subscription;
 
-
-  constructor(private translate: TranslateService) {
+  constructor(  private usuarioService: UsuarioService, private router: Router, private translate: TranslateService) {
     translate.setDefaultLang('en');
+
+    this.usuarioService.retrieveUsuario();
+    this.usuarioEventSubscription = this.usuarioService.userEvents
+      .subscribe(
+        user => {
+          if (user) {
+            const obj = JSON.parse(user);
+            this.usuario = {
+              nombre: obj.nombre,
+              password: obj.password,
+              email: obj.email,
+              role: obj.role,
+              avatar: obj.avatar
+            };
+
+          } else {
+            console.log('NO HAY USER');
+          }
+        }
+      )
+  }
+
+  salir() {
+    this.router.navigateByUrl('/auth/login');
   }
 
   changeLanguage(lang: any) {
     this.translate.use(lang.code)
     this.selectedLanguage = lang;
+  }
+
+  ngOnDestroy(): void {
+    // tslint:disable-next-line: deprecation
+    this.usuarioEventSubscription.unsubscribe();
   }
 }

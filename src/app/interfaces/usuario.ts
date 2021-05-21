@@ -6,4 +6,5 @@ export interface IUsuario {
   role:     string;
   telefono?:string;
   _id?:     string;
+  avatar?:  string;
 }

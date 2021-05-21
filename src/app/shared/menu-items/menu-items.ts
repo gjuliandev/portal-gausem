@@ -44,8 +44,8 @@ const MENUITEMS = [
     icon: 'widgets',
     // badge: [{ type: 'red', value: '17' }],
     children: [
-      { state: 'badge', name: 'Usuarios', type: 'link' },
-      { state: 'button', name: 'Clientes', type: 'link' },
+      { state: 'usuarios', name: 'Usuarios', type: 'link' },
+      { state: 'clientes', name: 'Clientes', type: 'link' },
     ]
   },
   {

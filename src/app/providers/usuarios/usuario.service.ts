@@ -16,7 +16,10 @@ export class UsuarioService {
 
   getUsuario ( id: number ) {
     const url = `${environment.base_url}/usuarios/${id}`;
-    return this.http.get(url);
+    return this.http.get(url)
+      .pipe(
+        map( (res: any) => res['payload'][0])
+      );
   }
 
   getUsuarios() {
@@ -28,15 +31,32 @@ export class UsuarioService {
   }
 
   crearUsuario( usuario: IUsuario) {
+    console.log('el nuevo usuario es ' + JSON.stringify(usuario) );
+    const url = `${environment.base_url}/usuarios`;
+    const newUser = {
+      nombre: usuario.nombre,
+      email: usuario.email,
+      password: usuario.password,
+      telefono: usuario.telefono,
+      role: usuario.role
+    };
+    return this.http.post(url, newUser);
 
   }
 
   updateUsuario( usuario: IUsuario ) {
-
+    const url = `${environment.base_url}/usuarios/${usuario._id}`;
+    const updateUser = {
+      nombre: usuario.nombre,
+      email: usuario.email,
+      telefono: usuario.telefono,
+      role: usuario.role
+    }
+    return this.http.put(url, updateUser);
   }
 
-  deleteUsuario( id: number ){
-    const url = `${environment.base_url}/usuarios/${id}`;
+  deleteUsuario( usuario: IUsuario ){
+    const url = `${environment.base_url}/usuarios/${usuario._id}`;
     return this.http.delete(url);
   }
 

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { IUsuario } from 'src/app/interfaces/usuario';
+import { Subscription } from 'rxjs';
+import { UsuarioService } from 'src/app/providers/usuarios/usuario.service';
 
 @Component({
   selector: 'app-vertical-header',
@@ -8,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: []
 })
 
-export class VerticalAppHeaderComponent {
+export class VerticalAppHeaderComponent implements OnDestroy{
   public config: PerfectScrollbarConfigInterface = {};
 
 
@@ -105,14 +108,40 @@ export class VerticalAppHeaderComponent {
     icon: 'de'
   }]
 
+  usuario: IUsuario = { nombre: '', password: '', email: '', role: '', avatar: ''};
+  usuarioEventSubscription: Subscription;
 
-
-  constructor(private translate: TranslateService) {
+  constructor(private usuarioService: UsuarioService, private translate: TranslateService) {
     translate.setDefaultLang('en');
+
+    this.usuarioService.retrieveUsuario();
+    this.usuarioEventSubscription = this.usuarioService.userEvents
+      .subscribe(
+        user => {
+          if (user) {
+            const obj = JSON.parse(user);
+            this.usuario = {
+              nombre: obj.nombre,
+              password: obj.password,
+              email: obj.email,
+              role: obj.role,
+              avatar: obj.avatar
+            };
+
+          } else {
+            console.log('NO HAY USER');
+          }
+        }
+      )
   }
 
   changeLanguage(lang: any) {
     this.translate.use(lang.code)
     this.selectedLanguage = lang;
+  }
+
+  ngOnDestroy(): void {
+    // tslint:disable-next-line: deprecation
+    this.usuarioEventSubscription.unsubscribe();
   }
 }

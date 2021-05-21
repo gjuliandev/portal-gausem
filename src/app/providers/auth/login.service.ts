@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ILogin } from 'src/app/interfaces/login';
 import { IUsuario } from 'src/app/interfaces/usuario';
 import { environment } from 'src/environments/environment';
@@ -17,21 +17,22 @@ export class LoginService {
                private usuariosService: UsuarioService
               ) { }
 
-  authenticate(login: ILogin, recuerdame: boolean) {
+  authenticate(login: ILogin) {
   const url = `${environment.base_url}/auth/login`;
   return this.http.post(url, login)
             .pipe(
               tap((resp: any) => {
-                this.storageLoggedInUser(resp.usuario[0], recuerdame);
+                this.storageLoggedInUser(resp.usuario[0], login.recuerdame);
                 this.router.navigateByUrl('/starter');
                 this.usuariosService.retrieveUsuario();
-              } )
+              }),
+              map ( res => res.usuario[0])
             )
   }
 
   logout() {
     localStorage.removeItem('gausem-currentuser');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/auth/login');
   }
 
   isLogin() {
@@ -45,7 +46,8 @@ export class LoginService {
       password: ':-)',
       email:user.email,
       telefono: user.telefono,
-      role: user.role
+      role: user.role,
+      avatar: user.img
     }
 
     localStorage.setItem('gausem-currentuser', JSON.stringify(usuario) );

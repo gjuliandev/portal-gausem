@@ -4,28 +4,25 @@
 <div class="user-profile" style="background: url(assets/images/background/user-info.png) no-repeat;">
     <!-- User profile image -->
     <div class="profile-img">
-        <img src="assets/images/users/profile.png" alt="user"> </div>
+        <img [src]="usuario.avatar | imagen:'avatar'" alt="user"> </div>
     <!-- User profile text-->
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
     <div class="profile-text">
-        <a [matMenuTriggerFor]="sdprofile" class=""> Markarn Doe
+        <a [matMenuTriggerFor]="sdprofile" class=""> {{usuario.nombre}}
             <i class="ti-angle-down font-12 m-l-5"></i>
         </a>
     </div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>
-            <mat-icon>settings</mat-icon> Settings
+            <mat-icon>settings</mat-icon> Ajustes
         </button>
         <button mat-menu-item>
-            <mat-icon>account_box</mat-icon> Profile
+            <mat-icon>account_box</mat-icon> Perfil
         </button>
-        <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon> Disable notifications
-        </button>
-        <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon> Sign Out
+        <button mat-menu-item (click)="salir()">
+            <mat-icon>exit_to_app</mat-icon> Salir
         </button>
     </mat-menu>
 </div>

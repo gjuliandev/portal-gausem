@@ -1,0 +1,44 @@
+<div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
+    <div class="login-register-box">
+        <mat-card>
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="check()">
+                    <div class="text-center">
+                        <img alt="homepage" src="assets/images/logo-icon.png" width="200">
+                        <h4 class="m-t-0">Acceso al Portal</h4>
+                    </div>
+                    <!-- col full Erro login -->
+                    <div fxFlex.gt-sm="100" fxFlex.gt-xs="100">
+                      <div *ngIf="error" class="err">{{ msg }}</div>
+                    </div>
+                    <div fxLayout="row wrap">
+                        <!-- col full-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                            <mat-form-field>
+                                <input matInput type="email" placeholder="Email" formControlName="email">
+                            </mat-form-field>
+                            <small *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched" class="text-danger support-text">Email requerido.</small>
+                        </div>
+                        <!-- col full-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                            <mat-form-field>
+                                <input matInput type="password" placeholder="Password" formControlName="password">
+                            </mat-form-field>
+                            <small *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="text-danger support-text">Contraseña requerida.</small>
+                        </div>
+                        <!-- col half-->
+                        <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
+                            <mat-checkbox color="primary" formControlName="recuerdame">Recuérdame</mat-checkbox>
+                        </div>
+
+                        <!-- col full-->
+                        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit" [disabled]="!loginForm.valid">Login</button>
+                        </div>
+
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
