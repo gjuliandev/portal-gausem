@@ -13,12 +13,16 @@ export const AppRoutes: Routes = [
                 pathMatch: 'full'
             },
             {
-                path: 'material',
-                loadChildren: () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
-            },
-            {
                 path: 'starter',
                 loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)
+            },
+            {
+              path: 'auth',
+              loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+            },
+            {
+              path: 'pages',
+              loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
             }
         ]
     }

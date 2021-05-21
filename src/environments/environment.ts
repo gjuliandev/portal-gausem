@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  base_url: 'http://vl21599.dinaserver.com:13437/api'
+  // base_url: 'http://localhost:10000/api'
 };
 
 /*

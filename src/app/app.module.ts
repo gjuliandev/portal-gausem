@@ -18,7 +18,7 @@ import { HorizontalAppSidebarComponent } from './layouts/full/horizontal-sidebar
 
 import { AppBreadcrumbComponent } from './layouts/full/breadcrumb/breadcrumb.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DemoMaterialModule } from './demo-material-module';
+import { MaterialModule } from './material-module';
 
 
 import { SharedModule } from './shared/shared.module';
@@ -57,7 +57,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    DemoMaterialModule,
+    MaterialModule,
     FormsModule,
     FlexLayoutModule,
     PerfectScrollbarModule,
