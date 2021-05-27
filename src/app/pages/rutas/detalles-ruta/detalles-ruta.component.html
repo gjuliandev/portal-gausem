@@ -1,0 +1,121 @@
+<div class="left">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Datos de la Ruta
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-map-o p-10"></i>{{ ruta.nombre_ruta }}
+        </div>
+
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-paper-plane-o p-10"></i>{{ ruta.kilometros }} Km
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-user-o p-10"></i> {{ruta.nombre_usuario}}
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-clock-o p-10"></i> {{ruta.fecha | date: 'mediumDate'}}
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-hourglass-start p-10"></i>{{ ruta.inicio | date: 'shortTime'}}
+        </div>
+
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-hourglass-end p-10"></i>{{ ruta.fin | date: 'shortTime'}}
+        </div>
+      </div>
+
+
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-hourglass-o p-10"></i>{{ ruta.duracion |  horasFromMinutes }}
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="right">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Visitas ({{visitas.length}})</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ul class="timeline" *ngFor="let visita of visitas">
+            <li [ngClass]="{ 'timeline-inverted': visita.orden % 2 === 0 }">
+                <div class="timeline-badge success">
+                    <img class="img-responsive" alt="user" [src]="ruta.img | imagen: 'avatar'" >
+                </div>
+                <div class="timeline-panel">
+
+                    <div class="timeline-heading">
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                        <div fxFlex.gt-sm="10" fxFlex.gt-xs="5" class="p-5">
+                          <h6 class="timeline-title orden">nº {{visita.orden}}</h6>
+                        </div>
+                        <div fxFlex.gt-sm="75" fxFlex.gt-xs="50" class="p-20">
+                          <h4 class="timeline-title">{{visita.nombreComercial}}</h4>
+                        </div>
+                        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-5">
+                          <small class="text-muted">
+                              <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'shortTime'}}
+                          </small>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                          <h5 class="timeline-title">{{visita.tipo}}</h5>
+                        </div>
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                        </div>
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.nAlbaran">
+                          <h5 class="timeline-title">nº albarán {{visita.nAlbaran}}</h5>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" class="p-5">
+                          <h5 class="timeline-title">Datos Recogida:</h5>
+                        </div>
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                          <h5 class="timeline-title">{{visita.bidones}} Bidones</h5>
+                        </div>
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                          <h5 class="timeline-title">{{visita.kilos}} Kilos</h5>
+                        </div>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" class="p-5">
+                          <h5 class="timeline-title">Datos Entrega:</h5>
+                        </div>
+                        <div fxFlex.gt-sm="66" fxFlex.gt-xs="30" class="p-5">
+                          <h5 class="timeline-title">{{visita.entregado}} €</h5>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="timeline-body" *ngIf="visita.notas">
+                        <small>notas:</small>
+                        <p>{{visita.notas}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+

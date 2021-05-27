@@ -49,12 +49,12 @@ const MENUITEMS = [
     ]
   },
   {
-    state: 'app',
+    state: 'planificacion',
     name: 'Planificación',
     type: 'sub',
     icon: 'local_shipping',
     children: [
-      { state: 'badge', name: 'Rutas', type: 'link' },
+      { state: 'rutas', name: 'Rutas', type: 'link' },
     ]
   }
 ];

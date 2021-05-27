@@ -20,6 +20,10 @@ export const AppRoutes: Routes = [
             {
               path: 'admin',
               loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+            },
+            {
+              path: 'planificacion',
+              loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
             }
         ]
     },

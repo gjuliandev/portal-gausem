@@ -1,0 +1,68 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <div fxLayout="row wrap" class="align-items-center">
+          <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex.gt-xl="25" fxFlex="100">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Ruta">
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-md="75" class="text-right">
+            <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Nueva Planificación</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row wrap">
+  <!-- column -->
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100"  *ngFor="let ruta of rutas">
+      <mat-card>
+          <!-- Row -->
+          <div class="ruta-header">
+
+              <div class="header">
+                <div fxLayout="row" fxLayout="wrap">
+                  <div fxFlex.gt-sm="15" fxFlex.gt-xs="50" class="p-10 b-r" >
+                    <img [src]="ruta.img | imagen:'avatar'" width="50" class="avatar"/>
+                  </div>
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10 b-r m-t-15">
+                    <h3 class="font-medium  m-0">{{ ruta.nombre_usuario }}</h3>
+                </div>
+                <div fxFlex.gt-sm="35" fxFlex.gt-xs="50" class="p-10 m-t-10">
+                  <small class="font-small m-0">{{ ruta.nombre_ruta }}</small>
+                </div>
+                </div>
+              </div>
+
+
+              <div fxLayout="row" fxLayoutWrap="wrap" class="text-center">
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10 b-r">
+                      <h3 class="font-medium m-0">{{ ruta.fecha | date: 'mediumDate' }}</h3>
+                      <span class="text-muted">Fecha</span>
+                  </div>
+                  <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10">
+                    <h3 class="font-medium  m-0">{{ ruta.duracion | horasFromMinutes  }}</h3>
+                    <span class="text-muted">Duración</span>
+                  </div>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap" class="text-center">
+
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10">
+                  <h3 class="font-medium  m-0">10</h3>
+                  <span class="text-muted">Nº Visitas</span>
+                </div>
+                <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10 b-r">
+                  <h3 class="font-medium m-0">{{ ruta.kilometros }} Km</h3>
+                  <span class="text-muted">Distancia</span>
+                </div>
+              </div>
+          </div>
+          <mat-card-actions class="btn-action">
+            <button mat-raised-button color="primary" (click)="verDetalles(ruta)">Ver Ruta</button>
+          </mat-card-actions>
+      </mat-card>
+  </div>

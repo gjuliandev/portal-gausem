@@ -1,0 +1,31 @@
+
+.mat-table__wrapper .mat-table {
+  min-width: auto !important;
+  width: 100% !important;
+}
+
+.mat-header-row {
+  width: 100%;
+}
+
+.mat-row {
+  width: 100%;
+}
+
+.mat-row:hover{
+  cursor: pointer;
+  background-color: #F4f4f4;
+}
+
+.inner {
+  padding: 12px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center {
+  text-align: center;
+}
+

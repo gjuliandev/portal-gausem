@@ -1,0 +1,104 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100">
+    <mat-card>
+      <mat-card-content>
+        <div fxLayout="row wrap" class="align-items-center">
+          <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex.gt-xl="25" fxFlex="100">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Cliente">
+            </mat-form-field>
+          </div>
+          <div fxFlex.gt-md="75" class="text-right">
+            <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Nuevo Cliente</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row wrap">
+  <div fxFlex="100">
+
+    <mat-card>
+      <mat-card-content>
+          <div class="loading-indicator row" *ngIf="isLoaing">
+            <mat-spinner class="inner"></mat-spinner>
+          </div>
+
+          <table mat-table [dataSource]="dataSource" class="table employee-list no-wrap" matSort>
+            <!-- Img Column -->
+            <!-- <ng-container matColumnDef="logo">
+              <th mat-header-cell *matHeaderCellDef> Logo </th>
+              <td mat-cell *matCellDef="let element"> <img [src]="element.logo | imagen:'logo'" width="50"/> </td>
+            </ng-container> -->
+            <!-- NombreComercial Column -->
+            <ng-container matColumnDef="nombreComercial">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Comercial</th>
+              <td mat-cell *matCellDef="let element">
+                {{element.nombreComercial}}</td>
+            </ng-container>
+
+            <!-- cif Column -->
+            <ng-container matColumnDef="cif">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> CIF </th>
+              <td mat-cell *matCellDef="let element">{{element.cif}}</td>
+            </ng-container>
+
+            <!-- abonado Column -->
+            <ng-container matColumnDef="abonado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Abonado </th>
+              <td mat-cell *matCellDef="let element">{{element.abonado}}</td>
+            </ng-container>
+
+             <!-- cantidad_abonada Column -->
+             <ng-container matColumnDef="cantidad_abonada">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad Abonada </th>
+              <td mat-cell *matCellDef="let element">{{element.cantidad_abonada}}</td>
+            </ng-container>
+
+            <!-- Periodicidad Column -->
+            <ng-container matColumnDef="periodicidad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Periodicidad </th>
+              <td mat-cell *matCellDef="let element">{{element.periodicidad}}</td>
+            </ng-container>
+
+            <!-- Consumo Column -->
+            <ng-container matColumnDef="consumo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Consumo </th>
+              <td mat-cell *matCellDef="let element">{{element.consumo}}</td>
+            </ng-container>
+
+            <!-- Renovacion Certificado Column -->
+            <ng-container matColumnDef="renovacion_certificado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Renovación Certificado </th>
+              <td mat-cell *matCellDef="let element">{{element.renovacion_certificado | date: 'mediumDate'}}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element" class="action-link">
+                <a (click)="openDialog('Update',element)" class="m-r-10 cursor-pointer"><i class="fa fa-pencil fa-lg"></i></a>
+                <a (click)="openDialog('Delete',element)" class="m-r-10 cursor-pointer"><i class="fa fa-trash text-danger fa-lg"></i>
+                </a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="verDetalles(row)"></tr>
+
+          </table>
+          <div>
+            <h1 class="text-muted center" *ngIf="!hayDatos && dataSource.data.length <= 0">No existen clientes</h1>
+          </div>
+          <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+          </mat-paginator>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

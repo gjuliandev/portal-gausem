@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IUsuario } from 'src/app/interfaces/usuario';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from 'src/app/providers/usuarios/usuario.service';
+import { LoginService } from 'src/app/providers/auth/login.service';
 
 @Component({
   selector: 'app-vertical-header',
@@ -111,7 +112,9 @@ export class VerticalAppHeaderComponent implements OnDestroy{
   usuario: IUsuario = { nombre: '', password: '', email: '', role: '', avatar: ''};
   usuarioEventSubscription: Subscription;
 
-  constructor(private usuarioService: UsuarioService, private translate: TranslateService) {
+  constructor(private usuarioService: UsuarioService,
+              private loginService: LoginService,
+              private translate: TranslateService) {
     translate.setDefaultLang('en');
 
     this.usuarioService.retrieveUsuario();
@@ -133,6 +136,10 @@ export class VerticalAppHeaderComponent implements OnDestroy{
           }
         }
       )
+  }
+
+  salir() {
+    this.loginService.logout();
   }
 
   changeLanguage(lang: any) {

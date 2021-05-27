@@ -1,0 +1,136 @@
+
+<h2 class="font-medium" mat-dialog-title><strong>{{action}}</strong></h2>
+
+<mat-dialog-content class="pb-3" *ngIf="action != 'Delete'; else elseTemplate">
+
+  <form [formGroup]="clientForm" (ngSubmit)="doAction()">
+
+        <!-- <div class="text-center">
+            <img alt="logo" [src]="this.local_data.logo | imagen: 'logo'" width="100">
+        </div> -->
+
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+
+          <!-- col full nombre comercial-->
+          <div fxFlex.gt-lg="40" fxFlex="100" >
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre Comercial</mat-label>
+              <input matInput type="text" placeholder="Nombre Comercial" formControlName="nombreComercial">
+            </mat-form-field>
+          </div>
+
+          <!-- col full nombre fiscal-->
+          <div fxFlex.gt-lg="40" fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre Fiscal</mat-label>
+                <input matInput type="text" placeholder="Nombre Fiscal" formControlName="nombreFiscal">
+              </mat-form-field>
+          </div>
+
+           <!-- col full siglas-->
+           <div fxFlex.gt-lg="15" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Alias</mat-label>
+              <input matInput type="text" placeholder="Siglas" formControlName="siglas">
+            </mat-form-field>
+          </div>
+
+          <!-- col full cif-->
+          <div fxFlex.gt-lg="30" fxFlex="100">
+              <mat-form-field appearance="outline">
+                <mat-label>CIF</mat-label>
+                <input matInput type="text" placeholder="CIF" formControlName="cif">
+              </mat-form-field>
+          </div>
+
+          <!-- col full fecha alta-->
+          <div fxFlex.gt-lg="30" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha Alta</mat-label>
+              <input matInput formControlName="fecha_alta" [matDatepicker]="alta">
+              <mat-datepicker-toggle matSuffix [for]="alta"></mat-datepicker-toggle>
+              <mat-datepicker #alta></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- col full renovacion certificado-->
+          <div fxFlex.gt-lg="30" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha Renovación Certificado</mat-label>
+              <input matInput formControlName="renovacion_certificado"  [matDatepicker]="renovacion">
+              <mat-datepicker-toggle matSuffix [for]="renovacion"></mat-datepicker-toggle>
+              <mat-datepicker #renovacion></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- col half abonado-->
+          <div fxFlex.gt-lg="22" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Abonado</mat-label>
+              <input matInput type="text" placeholder="Abonado" formControlName="abonado">
+            </mat-form-field>
+          </div>
+
+          <!-- col half cantidad_abonada-->
+          <div fxFlex.gt-lg="22" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Cantidad Abonada</mat-label>
+              <input matInput type="text" placeholder="Cantidad Abonada" formControlName="cantidad_abonada">
+              <span matSuffix>€</span>
+            </mat-form-field>
+          </div>
+
+           <!-- col half consumo-->
+           <div fxFlex.gt-lg="22" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Consumo</mat-label>
+              <input matInput type="text" placeholder="Consumo" formControlName="consumo">
+              <span matSuffix>Litros</span>
+            </mat-form-field>
+          </div>
+
+          <!-- col half periodicidad-->
+          <div fxFlex.gt-lg="22" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Periodicidad</mat-label>
+              <input matInput type="text" placeholder="Perdiodicidad en dias" formControlName="periodicidad">
+              <span matSuffix>Dias</span>
+            </mat-form-field>
+          </div>
+
+          <!-- col half IBAN-->
+          <div fxFlex.gt-lg="100" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>IBAN</mat-label>
+              <input matInput type="text" placeholder="IBAN" formControlName="IBAN">
+            </mat-form-field>
+          </div>
+
+          <!-- col half notas -->
+          <div fxFlex.gt-lg="100" fxFlex="100">
+            <mat-form-field appearance="outline">
+              <mat-label>Notas</mat-label>
+              <textarea matInput
+                type="text"
+                placeholder="Notas"
+                formControlName="notas"
+                cdkTextareaAutosize
+                rows="5"></textarea>
+            </mat-form-field>
+          </div>
+
+      </div>
+  </form>
+  <button mat-button (click)="doAction()" mat-flat-button color="warn"
+            [disabled]="!clientForm.valid">{{action}}</button>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+</mat-dialog-content>
+
+
+<ng-template #elseTemplate>
+  <p>¿Seguro que desea eliminar al cliente <b>{{local_data.nombreComercial}}</b> ?</p>
+  <div mat-dialog-actions align="end" class="pt-3">
+      <button mat-button (click)="doAction()" mat-flat-button color="warn">{{action}}</button>
+      <button mat-button (click)="closeDialog()">Cancelar</button>
+  </div>
+</ng-template>

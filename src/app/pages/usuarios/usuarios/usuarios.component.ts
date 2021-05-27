@@ -12,28 +12,31 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class UsuariosComponent implements OnInit {
 
   dataSource = new MatTableDataSource([]);
-  displayedColumns = ['img', 'nombre', 'email', 'telefono', 'action']
+  displayedColumns = ['img', 'nombre', 'email', 'telefono', 'role', 'action']
 
   constructor(private usuarioService: UsuarioService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
-    this.usuarioService.getUsuarios()
-      .subscribe( usuarios => {
-        this.dataSource.data = usuarios;
-      });
+    this.findAllUsers();
   }
 
   applyFilter(term: string) {
 
   }
 
+  findAllUsers() {
+    this.usuarioService.getUsuarios()
+    .subscribe( usuarios => {
+      this.dataSource.data = usuarios;
+    });
+  }
+
   openDialog(action: string, obj: any) {
 
     obj.action = action; // Añadimos al objeto usuario el campo action (Add, Update, Delete)
 
-    const dialogRef = this.dialog.open(DialogComponent, {data: obj});
+    const dialogRef = this.dialog.open(DialogComponent, {data: obj, disableClose: true});
 
     dialogRef.afterClosed()
       .subscribe( result => {
@@ -41,15 +44,15 @@ export class UsuariosComponent implements OnInit {
         switch(result.event) {
           case 'Add':
             this.usuarioService.crearUsuario(result.data)
-              .subscribe(res => console.log(res));
+              .subscribe(res =>  this.findAllUsers() );
             break;
           case 'Update':
             this.usuarioService.updateUsuario(result.data)
-              .subscribe(res => console.log(res));
+              .subscribe(res => this.findAllUsers() );
             break;
           case 'Delete':
             this.usuarioService.deleteUsuario(result.data)
-              .subscribe(res => console.log(res));
+              .subscribe(res => this.findAllUsers() );
             break;
           default:
             break;
