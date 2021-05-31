@@ -73,4 +73,15 @@ export class ClientesService {
     return this.http.delete(url);
   }
 
+  activar( cliente: ICliente) {
+    const url = `${environment.base_url}/clientes/activar/${cliente._id}`;
+    return this.http.get(url);
+  }
+
+  desactivar(cliente: ICliente){
+
+    const url = `${environment.base_url}/clientes/desactivar/${cliente._id}`;
+    return this.http.get(url);
+  }
+
 }

@@ -40,7 +40,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -96,7 +96,8 @@ import { PortalModule } from '@angular/cdk/portal';
         ObserversModule,
         OverlayModule,
         PlatformModule,
-        PortalModule
+        PortalModule,
+        DragDropModule
     ]
 })
 export class MaterialModule { }

@@ -1,11 +1,11 @@
 
 
 export interface IVisita {
-  alias:      string;
-  fecha:      Date;
-  lat:        number;
-  lng:        number;
-  tipo:       string;
+  alias?:      string;
+  fecha:      string;
+  lat?:        number;
+  lng?:        number;
+  tipo?:       string;
   bidones?:   number;
   kilos?:     number;
   entregado?: number;

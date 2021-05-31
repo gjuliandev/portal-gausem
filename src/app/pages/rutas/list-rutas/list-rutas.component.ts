@@ -24,7 +24,9 @@ export class ListRutasComponent implements OnInit {
 
   }
 
-  openDialog(action: string, {}) {}
+  planificar(action: string, {}) {
+    this.router.navigateByUrl('planificacion/planificar');
+  }
 
   findAllRutas() {
     this.rutasService.getRutas()

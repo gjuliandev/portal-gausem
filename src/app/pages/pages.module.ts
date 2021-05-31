@@ -17,7 +17,14 @@ import { PlanificacionComponent } from './planificacion/planificacion.component'
 
 
 @NgModule({
-  declarations: [UsuariosComponent, DialogComponent, ClientesComponent, ClienteDialogComponent, ClienteProfileComponent, ListRutasComponent, DetallesRutaComponent, PlanificacionComponent],
+  declarations: [ UsuariosComponent,
+                  DialogComponent,
+                  ClientesComponent,
+                  ClienteDialogComponent,
+                  ClienteProfileComponent,
+                  ListRutasComponent,
+                  DetallesRutaComponent,
+                  PlanificacionComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -25,7 +32,7 @@ import { PlanificacionComponent } from './planificacion/planificacion.component'
     FlexLayoutModule,
     PipesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class PagesModule { }

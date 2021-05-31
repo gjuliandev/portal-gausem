@@ -1,0 +1,15 @@
+
+.wrap {
+  min-width: 600px;
+  max-width: 800px;
+}
+
+.avatar {
+  border: 1px solid;
+  border-radius: 50% 50% 50% 50%;
+  text-align: center;
+  line-height: 50px;
+  color: green;
+  overflow: hidden;
+  width: 50px;
+}

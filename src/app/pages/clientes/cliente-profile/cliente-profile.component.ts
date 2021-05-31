@@ -4,8 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IDireccion } from 'src/app/interfaces/direccion';
+import { ClientesService } from 'src/app/providers/clientes/clientes.service';
 import { DireccionesService } from 'src/app/providers/direcciones/direcciones.service';
 import { ClienteResolver } from 'src/app/resolvers/cliente.resolver';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente-profile',
@@ -16,6 +18,7 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
 
   cliente:   any = null;
   direccion: any = null;
+  visitas:   Array<any> = [];
   private unsubscribeAll: Subject<any> = new Subject();
 
   addressForm: FormGroup = Object.create(null);
@@ -23,6 +26,7 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   action: string = '';
 
   constructor( private clienteResolver: ClienteResolver,
+               private clienteService: ClientesService,
                private fb: FormBuilder,
                private direccionesService: DireccionesService ) { }
 
@@ -49,7 +53,13 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
             }
 
         }
-      )
+      );
+
+      this.clienteResolver.onVisitasChanged
+        .pipe( takeUntil(this.unsubscribeAll) )
+        .subscribe( (items: Array<any>) => {
+            this.visitas = items;
+      });
   }
 
   crearFormulario(accion: string) {
@@ -86,6 +96,31 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
        break;
     }
 
+  }
+
+  activar() {
+    this.clienteService.activar(this.cliente)
+      .subscribe( resp => {
+
+        Swal.fire(
+          'Cliente Activado',
+          'El cliente ha sido activado correctamente.',
+          'success'
+        );
+        this.clienteResolver.findCliente(this.cliente._id).then();
+      });
+  }
+
+  desactivar() {
+    this.clienteService.desactivar(this.cliente)
+    .subscribe( resp => {
+      Swal.fire(
+        'Cliente Desactivado',
+        'El cliente ha sido desactivado correctamente.',
+        'success'
+      );
+      this.clienteResolver.findCliente(this.cliente._id).then();
+    });
   }
 
   ngOnDestroy(): void {

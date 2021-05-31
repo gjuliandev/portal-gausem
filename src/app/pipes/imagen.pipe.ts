@@ -7,8 +7,6 @@ import { environment } from 'src/environments/environment';
 export class ImagenPipe implements PipeTransform {
 
   transform(value: string, tipo: string = 'avatar') {
-    console.log('hay file? ' +value);
-    console.log('tipo ' + tipo);
     if (!value) {
 
       return `${environment.base_url}/file/${tipo}/xxx`;

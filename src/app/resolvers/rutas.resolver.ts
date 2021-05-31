@@ -24,7 +24,6 @@ export class RutasResolver implements Resolve<boolean> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise( (resolve, reject) => {
       const id = route.params['id'];
-      console.log('Resolver ID '+ id);
       Promise.all([
         this.findRuta(id),
         this.findVisitas(id)

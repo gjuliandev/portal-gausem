@@ -19,8 +19,16 @@ export class VisitasService {
       );
   }
 
-  getVisitasByRuta ( id: number ) {
+  getVisitasByRuta ( id: number = 0 ) {
     const url = `${environment.base_url}/visitas/ruta/${id}`;
+    return this.http.get(url)
+      .pipe(
+        map( (res: any) => res['payload'])
+      );
+  }
+
+  getVisitasByCliente ( id: number = 0 ) {
+    const url = `${environment.base_url}/visitas/cliente/${id}`;
     return this.http.get(url)
       .pipe(
         map( (res: any) => res['payload'])
@@ -36,7 +44,6 @@ export class VisitasService {
   }
 
   crearVisita( visita: IVisita) {
-    console.log('la nueva visita es ' + JSON.stringify(visita) );
     const url = `${environment.base_url}/visitas`;
     const newVisita = {
       alias:      visita.alias,

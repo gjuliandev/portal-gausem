@@ -9,15 +9,18 @@
             </mat-form-field>
           </div>
           <div fxFlex.gt-md="75" class="text-right">
-            <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Nueva Planificación</button>
+            <button mat-raised-button (click)="planificar('Add',{})" color="primary">Nueva Planificación</button>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
-
+<div class="center text-muted" *ngIf="rutas.length <= 0">
+  <h1>No existen rutas</h1>
+</div>
 <div fxLayout="row wrap">
+
   <!-- column -->
   <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100"  *ngFor="let ruta of rutas">
       <mat-card>
@@ -52,7 +55,7 @@
               <div fxLayout="row" fxLayoutWrap="wrap" class="text-center">
 
                 <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10">
-                  <h3 class="font-medium  m-0">10</h3>
+                  <h3 class="font-medium  m-0">{{ruta.nVisitas}}</h3>
                   <span class="text-muted">Nº Visitas</span>
                 </div>
                 <div fxFlex.gt-sm="50" fxFlex.gt-xs="50" class="p-10 b-r">

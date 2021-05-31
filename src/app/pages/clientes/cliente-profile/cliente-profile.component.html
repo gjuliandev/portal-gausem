@@ -16,10 +16,10 @@
   <!-- Card column -->
   <div fxFlex.gt-sm="25" fxFlex="100">
       <mat-card class="oh text-center little-profile">
-          <img mat-card-image src="assets/images/background/profile-bg.jpg" alt="Photo of a Shiba Inu">
+          <img mat-card-image src="assets/images/restaurants/profile.jpg" alt="Photo of a Shiba Inu">
           <mat-card-content>
               <div class="pro-img">
-                  <img src="assets/images/users/4.jpg" width="100" alt="user">
+                  <img src="assets/images/users/veolacarta.jpg" width="75" alt="user">
               </div>
 
               <h3 class="m-b-0">{{cliente.nombreComercial}}</h3>
@@ -27,10 +27,10 @@
               <h6 class="m-t-0">{{direccion.codPostal}} {{direccion.provincia }}</h6>
 
               <mat-card-actions *ngIf="cliente.abonado">
-                  <button mat-raised-button color="warn">Desactivar</button>
+                  <button mat-raised-button color="warn" (click)="desactivar()">Desactivar</button>
               </mat-card-actions>
               <mat-card-actions *ngIf="!cliente.abonado">
-                <button mat-raised-button color="primary">Activar</button>
+                <button mat-raised-button color="primary" (click)="activar()">Activar</button>
             </mat-card-actions>
               <div fxLayout="row" fxLayoutWrap="wrap" class="m-t-30">
                   <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100">
@@ -57,22 +57,31 @@
               <!-- Tab 1 -->
               <mat-tab label="Visitas">
                   <mat-card-content>
-                      <!-- <div class="d-flex no-blcok" *ngFor="let mytimeline of mytimelines">
-                          <div class="m-r-20">
-                              <img class="img-circle" width="50" [src]="mytimeline.image" alt="Image of {{mytimeline.from}}"> </div>
-                          <div class="p-b-20 b-b m-b-30">
-                              <h3 class="m-0">{{mytimeline.from}}
-                                  <small class="text-muted">{{mytimeline.time}}</small>
-                              </h3>
-                              <p class="text-muted">{{mytimeline.content}}</p>
-                              <div fxLayout="row wrap">
-                                  <div fxFlex.gt-sm="20" fxFlex="100">
-                                      <img class="img-responsive rounded" [src]="mytimeline.attachment" *ngIf="mytimeline.attachment" alt="Image of {{mytimeline.attachment}}">
-                                  </div>
+                      <div class="d-flex no-block" *ngFor="let visita of visitas">
+                        <div class="wrap">
+                          <div >
+                            <div fxLayout="row">
+                              <div class="m-r-20 b-r">
+                                <img class="img-circle" width="50" [src]="visita.img | imagen:'avatar'" alt="Image of {{visita.nombreComercial}}">
                               </div>
-                              <button mat-raised-button color="{{mytimeline.buttons}}" *ngIf="mytimeline.buttons">Check Now</button>
+                              <div  fxLayout="column" fxLayoutAlign="center start" >
+                                <div>
+                                  <small class="text-muted">
+                                      <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'medium'}}
+                                  </small>
+                                </div>
+                                <h4>{{visita.nombre}}</h4>
+
+                                <div>
+                                  <small>ID Ruta</small> {{visita.idRuta}}
+                                </div>
+
+                              </div>
+
+                            </div>
                           </div>
-                      </div> -->
+                        </div>
+                      </div>
                   </mat-card-content>
               </mat-tab>
               <!-- End Tab 1 -->
