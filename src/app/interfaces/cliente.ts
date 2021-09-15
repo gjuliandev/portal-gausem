@@ -11,6 +11,8 @@ export interface ICliente {
   consumo?:                number,
   fecha_alta?:             Date;
   renovacion_certificado?: Date;
+  proxima_visita?:         Date;
   _id?:                   string;
   logo?:                  string;
+  persistente?:            string;
 }

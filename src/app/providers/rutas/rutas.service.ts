@@ -53,7 +53,7 @@ export class RutasService {
       kilometros:          ruta.kilometros,
       duracion:            ruta.duracion,
       usuario_id:          ruta.usuario_id,
-      ruta_planificada_id: ruta.ruta_planificada_id
+      estado:              ruta.estado,
     };
     return this.http.post(url, newRuta);
   }
@@ -67,6 +67,7 @@ export class RutasService {
       kilometros: ruta.kilometros,
       duracion:   ruta.duracion,
       usuario_id: ruta.usuario_id,
+      estado:     ruta.estado,
       _id:        ruta._id
     }
     return this.http.put(url, updateRuta)
@@ -74,6 +75,7 @@ export class RutasService {
 
   eliminarRuta( ruta: IRuta ) {
     const url = `${environment.base_url}/rutas/${ruta._id}`;
+    console.log('vamos a eliminar la ruta');
     return this.http.delete(url);
   }
 }

@@ -42,8 +42,8 @@
                       <small>Total Recogido</small>
                   </div>
                   <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100">
-                      <h3 class="m-0 font-light">{{cliente.periodicidad}} dias</h3>
-                      <small>Periodicidad</small>
+                      <h3 class="m-0 font-light">{{cliente.proxima_visita | date: 'mediumDate' || '--'}} </h3>
+                      <small>Próxima Visita</small>
                   </div>
               </div>
           </mat-card-content>

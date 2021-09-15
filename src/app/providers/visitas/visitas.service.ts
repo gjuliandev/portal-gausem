@@ -88,4 +88,9 @@ export class VisitasService {
     const url = `${environment.base_url}/visitas/${visita._id}`;
     return this.http.delete(url);
   }
+
+  eliminarVisitasRuta( idRuta: number = 0 ) {
+    const url = `${environment.base_url}/visitas/ruta/${idRuta}`;
+    return this.http.delete(url);
+  }
 }

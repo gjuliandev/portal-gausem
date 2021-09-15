@@ -8,25 +8,15 @@
     <mat-card-content>
 
       <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-map-o p-10"></i>{{ ruta.nombre_ruta }}
-        </div>
 
-        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-paper-plane-o p-10"></i>{{ ruta.kilometros }} Km
-        </div>
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-user-o p-10"></i> {{ruta.nombre_usuario}}
-        </div>
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
           <i class="fa fa-clock-o p-10"></i> {{ruta.fecha | date: 'mediumDate'}}
         </div>
+
+          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
+            <i class="fa fa-user-o p-10"></i> {{ruta.nombre_usuario}}
+          </div>
+
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -39,12 +29,16 @@
         </div>
       </div>
 
-
       <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
+          <i class="fa fa-paper-plane-o p-10"></i>{{ ruta.kilometros }} Km
+        </div>
+
         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
           <i class="fa fa-hourglass-o p-10"></i>{{ ruta.duracion |  horasFromMinutes }}
         </div>
       </div>
+
 
     </mat-card-content>
   </mat-card>

@@ -64,7 +64,7 @@
           </div>
 
           <!-- col half abonado-->
-          <div fxFlex.gt-lg="22" fxFlex="100">
+          <div fxFlex.gt-lg="18" fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Abonado</mat-label>
               <input matInput type="text" placeholder="Abonado" formControlName="abonado">
@@ -72,7 +72,7 @@
           </div>
 
           <!-- col half cantidad_abonada-->
-          <div fxFlex.gt-lg="22" fxFlex="100">
+          <div fxFlex.gt-lg="18" fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Cantidad Abonada</mat-label>
               <input matInput type="text" placeholder="Cantidad Abonada" formControlName="cantidad_abonada">
@@ -81,7 +81,7 @@
           </div>
 
            <!-- col half consumo-->
-           <div fxFlex.gt-lg="22" fxFlex="100">
+           <div fxFlex.gt-lg="18" fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Consumo</mat-label>
               <input matInput type="text" placeholder="Consumo" formControlName="consumo">
@@ -90,11 +90,21 @@
           </div>
 
           <!-- col half periodicidad-->
-          <div fxFlex.gt-lg="22" fxFlex="100">
+          <div fxFlex.gt-lg="18" fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Periodicidad</mat-label>
               <input matInput type="text" placeholder="Perdiodicidad en dias" formControlName="periodicidad">
               <span matSuffix>Dias</span>
+            </mat-form-field>
+          </div>
+
+          <!-- col half próxima visita-->
+          <div fxFlex.gt-lg="18" fxFlex="20">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha Próxima Visita</mat-label>
+              <input matInput formControlName="proxima_visita"  [matDatepicker]="proximaVisita">
+              <mat-datepicker-toggle matSuffix [for]="proximaVisita"></mat-datepicker-toggle>
+              <mat-datepicker #proximaVisita></mat-datepicker>
             </mat-form-field>
           </div>
 

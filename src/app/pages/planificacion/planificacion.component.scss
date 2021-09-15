@@ -1,5 +1,24 @@
 @import '../../../assets/styles/variable';
 
+.filtro-wrapper {
+  width: 200px;
+
+  padding-right: 8px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  // height: 100%;
+  border-right:rgba(0, 0, 0, 0.5) solid 1px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
 .urgente {
   color: $danger;
 }

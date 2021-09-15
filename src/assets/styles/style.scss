@@ -64,6 +64,6 @@ File: scss
 }
 
 $custom-typography: mat-typography-config(
-  $font-family: "Poppins",
-);
+  $font-family: "Muli",
+); //Poppins
 @include mat-core($custom-typography);

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationExtras, Router } from '@angular/router';
 import { IRuta } from 'src/app/interfaces/ruta';
 import { RutasService } from 'src/app/providers/rutas/rutas.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-rutas',
@@ -14,7 +16,9 @@ export class ListRutasComponent implements OnInit {
   isLoaing = true;
   hayDatos = true;
 
-  constructor(private rutasService: RutasService, private router: Router) { }
+  constructor(private rutasService: RutasService,
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.findAllRutas();
@@ -39,6 +43,36 @@ export class ListRutasComponent implements OnInit {
 
   verDetalles(ruta: IRuta) {
     this.router.navigateByUrl('planificacion/rutas/'+ruta._id);
+  }
+
+  editarRuta(ruta: IRuta) {
+    console.log('RUTA A EDITAR ' + JSON.stringify(ruta));
+    const navigationExtras: NavigationExtras = {
+      state: {
+        fecha: ruta.fecha,
+        usuario_id: ruta.usuario_id,
+      }
+    };
+    this.router.navigateByUrl('/planificacion/planificar', navigationExtras);
+  }
+
+  eliminarRuta(ruta: IRuta){
+    Swal.fire({
+      title: 'Eliminar Ruta',
+      text: `¿Seguro que desea eliminar la ruta con ID: ${ruta._id}` ,
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.rutasService.eliminarRuta( ruta )
+          .subscribe( resp => {
+              this.snackBar.open('Ruta eliminada correctamente', 'Eliminar Ruta',       { duration: 2000 });
+              this.findAllRutas();
+          }, (error) => this.snackBar.open('Se ha producido un error', 'Eliminar Ruta', { duration: 2000})
+        )};
+    });
   }
 
 }

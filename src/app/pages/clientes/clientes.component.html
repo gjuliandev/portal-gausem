@@ -60,7 +60,7 @@
             <!-- Periodicidad Column -->
             <ng-container matColumnDef="periodicidad">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Periodicidad </th>
-              <td mat-cell *matCellDef="let element">{{element.periodicidad}}</td>
+              <td mat-cell *matCellDef="let element">{{element.periodicidad}} días</td>
             </ng-container>
 
             <!-- Consumo Column -->
@@ -73,6 +73,12 @@
             <ng-container matColumnDef="renovacion_certificado">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Renovación Certificado </th>
               <td mat-cell *matCellDef="let element">{{element.renovacion_certificado | date: 'mediumDate'}}</td>
+            </ng-container>
+
+             <!-- Próxima Revisión Column -->
+             <ng-container matColumnDef="proxima_visita">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Próxima Visita </th>
+              <td mat-cell *matCellDef="let element">{{element.proxima_visita | date: 'mediumDate'}}</td>
             </ng-container>
 
             <!-- Action Column -->

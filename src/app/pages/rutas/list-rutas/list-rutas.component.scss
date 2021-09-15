@@ -1,27 +1,25 @@
+
+
 .center {
     text-align: center;
 }
 
+.color-header-green {
+  background: #009688;
+  color: #fff;
+}
+
+.color-header-orange {
+  background: orange;
+  color: #fff;
+}
+
 .ruta-header {
   .header {
-    padding: 10;
+
     text-align: center;
-    font-size: 24px;
-    color: #fff;
-    background: #009688;
-    // &.box-facebook {
-    //   // background: #3b5998;
-    //   background: #009688;
-    // }
-    // &.box-twitter {
-    //   background: #00aced;
-    // }
-    // &.box-google {
-    //   background: #f86c6b;
-    // }
-    // &.box-linkedin {
-    //   background: #4875b4;
-    // }
+
+
   }
   .ruta-content {
     display: flex;

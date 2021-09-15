@@ -16,7 +16,7 @@ import { ClienteDialogComponent } from './cliente-dialog/cliente-dialog.componen
 export class ClientesComponent implements OnInit {
 
   dataSource = new MatTableDataSource([]);
-  displayedColumns = [ 'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'renovacion_certificado','action']
+  displayedColumns = [ 'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'renovacion_certificado', 'proxima_visita', 'action']
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator = Object.create(null);
   @ViewChild(MatSort, { static: true }) sort: MatSort = Object.create(null);
   isLoaing = true;

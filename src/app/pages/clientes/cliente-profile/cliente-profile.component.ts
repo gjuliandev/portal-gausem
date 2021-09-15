@@ -86,11 +86,25 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
       case 'update':
         newDireccion._id  = this.direccion._id;
         this.direccionesService.actualizarDireccion(newDireccion)
-          .subscribe( res => console.log(res));
+          .subscribe( res => {
+            console.log(res);
+            Swal.fire(
+              'Dirección Actualizada',
+              'Se ha actualizado la dirección correctamente',
+              'success'
+            );
+          });
         break;
       case 'add':
         this.direccionesService.crearDireccion(newDireccion)
-          .subscribe( res => console.log(res));
+          .subscribe( res => {
+            console.log(res);
+            Swal.fire(
+              'Dirección Añadida',
+              'Se ha añadido la dirección correctamente',
+              'success'
+            );
+          });
         break;
       default:
        break;

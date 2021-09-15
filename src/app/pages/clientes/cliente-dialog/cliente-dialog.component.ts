@@ -32,6 +32,7 @@ export class ClienteDialogComponent {
                   consumo: [this.local_data.consumo],
                   fecha_alta: [this.local_data.fecha_alta, Validators.required],
                   renovacion_certificado: [this.local_data.renovacion_certificado],
+                  proxima_visita: [this.local_data.proxima_visita]
                 })
               }
 
@@ -50,7 +51,8 @@ export class ClienteDialogComponent {
       periodicidad:           this.clientForm.value.periodicidad,
       consumo:                this.clientForm.value.consumo,
       fecha_alta:             this.clientForm.value.fecha_alta,
-      renovacion_certificado: this.clientForm.value.renovacion_certificado
+      renovacion_certificado: this.clientForm.value.renovacion_certificado,
+      proxima_visita:         this.clientForm.value.proxima_visita
     }
     this.dialogRef.close({ event: this.action, data: cliente });
   }

@@ -21,16 +21,6 @@
               </mat-form-field>
             </div>
 
-
-            <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="50">
-              <mat-form-field>
-                <mat-label>Selecciona una Ruta</mat-label>
-                <mat-select placeholder="Ruta" formControlName="rutaPlanificada">
-                  <mat-option *ngFor="let ruta of rutasPlanificadas" [value]="ruta._id">{{ruta.nombre}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
             <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="50">
               <mat-form-field>
                 <mat-label>Selecciona Comercial</mat-label>
@@ -45,21 +35,31 @@
 
           </form>
           <button mat-button (click)="crearRuta()" mat-flat-button color="primary"
-            [disabled]="!rutaForm.valid"> Crear Ruta
+            [disabled]="!rutaForm.valid"> Abrir Ruta
           </button>
         </mat-card-content>
       </mat-card>
+
+      <!-- FILTROS -->
+      <!-- <div class="filtro-wrapper">
+        <p>Filtrar Clientes:</p>
+
+        <mat-checkbox class="m-l-20" (change)="showClients($event.checked)">Mostrar más</mat-checkbox>
+
+      </div> -->
       <!-- CLIENTES CARD-->
       <div class="taskboard-wrapper b-r" *ngIf="planifica">
         <div class="taskboard-list todos">
           <div class="taskboard-header text-uppercase" >
             <strong>Clientes a Planificar ( {{clientesCard.length}} )</strong>
+
           </div>
+
           <div class="taskboard-cards" id="clientes" [cdkDropListData]="clientesCard" cdkDropList (cdkDropListDropped)="drop($event)">
             <div class="taskboard-task" cdkDrag *ngFor="let cliente of clientesCard" [ngClass]="{ 'task-status-danger': cliente.restan <= 0 }">
               <div fxLayout="row">
                 <div fxFlex="60" class="taskboard-task-title">
-                  {{cliente.nombreComercial}}
+                  {{cliente.cliente_id}} - {{cliente.nombreComercial}}
                 </div>
                 <div fxFlex="40" class="taskboard-task-title" [ngClass]="{ 'urgente': cliente.restan <= 0 }">
                   <small>Restan <strong>{{cliente.restan}}</strong> días</small>
@@ -81,12 +81,12 @@
       <div class="taskboard-wrapper" *ngIf="planifica">
         <div class="taskboard-list completed">
           <div class="taskboard-header text-uppercase" >
-            <strong> Planificación del dia  {{ruta.fecha | date: 'fullDate'}}</strong>
+            <strong> Planificación del día  {{ruta.fecha | date: 'fullDate'}}</strong>
           </div>
-          <div class="taskboard-cards" id="route" #route [cdkDropListData]="visitasCard" cdkDropList (cdkDropListDropped)="drop($event)">
-            <div class="taskboard-task b-b" cdkDrag *ngFor="let visita of visitasCard; index as i; ">
+          <div class="taskboard-cards" id="route" #route [cdkDropListData]="ruta.visitas" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div class="taskboard-task b-b" cdkDrag *ngFor="let visita of ruta.visitas; index as i; ">
 
-              <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}}</div>
+              <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}} <span *ngIf="!visita.persistente">*</span></div>
 
               <div>
                 <span class=" task-decription text-muted">
@@ -94,12 +94,12 @@
                 </span>
               </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="visitasCard.length > 0">
+            <div fxLayout="row" fxLayoutAlign="space-around center" >
               <div class="taskboard-wrapper center">
-                <button class="btnRuta" mat-button  mat-flat-button color="warn" (click)="resetVisitas()">RESET </button>
+                <button class="btnRuta" mat-button  mat-flat-button color="warn" (click)="resetVisitas()" [disabled]="!ruta.visitas?.length > 0">RESET </button>
               </div>
               <div class="taskboard-wrapper center">
-                <button class="btnRuta" mat-button (click)="guardarRuta($event)" mat-flat-button color="primary" (click)="guardarRuta(route)"> GUARDAR RUTA </button>
+                <button class="btnRuta" mat-button  mat-flat-button color="primary" (click)="guardarRuta()" [disabled]="!ruta.visitas?.length > 0"> GUARDAR RUTA </button>
               </div>
             </div>
 
