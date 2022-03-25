@@ -1,9 +1,9 @@
-<div class="left">
+<div>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>
+      <mat-card-subtitle>
         Datos de la Ruta
-      </mat-card-title>
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
 
@@ -43,10 +43,10 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div class="right">
+<div>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Visitas ({{visitas.length}})</mat-card-title>
+      <mat-card-title>Visitas realizadas ({{visitas.length}})</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <ul class="timeline" *ngFor="let visita of visitas">
@@ -59,7 +59,7 @@
                     <div class="timeline-heading">
                       <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                         <div fxFlex.gt-sm="10" fxFlex.gt-xs="5" class="p-5">
-                          <h6 class="timeline-title orden">nº {{visita.orden}}</h6>
+                          <h6 class="timeline-title orden">nº {{visita.orden + 1 }}</h6>
                         </div>
                         <div fxFlex.gt-sm="75" fxFlex.gt-xs="50" class="p-20">
                           <h4 class="timeline-title">{{visita.nombreComercial}}</h4>
@@ -77,22 +77,22 @@
                         </div>
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
                         </div>
-                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.nAlbaran">
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA' && visita.nAlbaran" >
                           <h5 class="timeline-title">nº albarán {{visita.nAlbaran}}</h5>
                         </div>
                       </div>
-                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" *ngIf="visita.tipo === 'RECOGIDA'">
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" class="p-5">
                           <h5 class="timeline-title">Datos Recogida:</h5>
                         </div>
-                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA'">
                           <h5 class="timeline-title">{{visita.bidones}} Bidones</h5>
                         </div>
-                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
+                        <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA'">
                           <h5 class="timeline-title">{{visita.kilos}} Kilos</h5>
                         </div>
                       </div>
-                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+                      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" *ngIf="visita.tipo === 'RECOGIDA'">
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" class="p-5">
                           <h5 class="timeline-title">Datos Entrega:</h5>
                         </div>

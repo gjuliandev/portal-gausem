@@ -75,30 +75,30 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
 
     const navigation = this.router.getCurrentNavigation(); //Obtenemos los parametros que me indica el componente que me llama
 
-      // Comrpobamos si ha datos de la ruta o no (seria una edicion o una nueva ruta)
-      if ( navigation?.extras.state) {
-        this.comercial = navigation.extras.state.usuario_id;
-        this.fechaRuta = navigation.extras.state.fecha;
-        this.rutaService.getRutaByParams( this.comercial, moment(this.fechaRuta).format('YYYY-MM-DD'))
-          .subscribe( (ruta: IRuta) => {
-            if (ruta) {
-              this.ruta = ruta; // Asignamos la ruta que nos devuelve la base de datos
-              this.cargarVisitasRuta();
-            }
-          });
+    // Comrpobamos si ha datos de la ruta o no (seria una edicion o una nueva ruta)
+    if ( navigation?.extras.state) {
+      this.comercial = navigation.extras.state.usuario_id;
+      this.fechaRuta = navigation.extras.state.fecha;
+      this.rutaService.getRutaByParams( this.comercial, moment(this.fechaRuta).format('YYYY-MM-DD'))
+        .subscribe( (ruta: IRuta) => {
+          if (ruta) {
+            this.ruta = ruta; // Asignamos la ruta que nos devuelve la base de datos
+            this.cargarVisitasRuta();
+          }
+        });
+    }
+
+    this.planificacionResolver.onUsuariosChanged
+      .pipe( takeUntil(this.unsubscribeAll) )
+      .subscribe( (items: Array<any>) => {
+        this.usuarios = items;
       }
+    );
 
-      this.planificacionResolver.onUsuariosChanged
-        .pipe( takeUntil(this.unsubscribeAll) )
-        .subscribe( (items: Array<any>) => {
-          this.usuarios = items;
-        }
-      );
-
-      this.rutaForm = this.fb.group({
-        fecha:          [this.fechaRuta, Validators.required],
-        comercial:      [this.comercial, Validators.required],
-      });
+    this.rutaForm = this.fb.group({
+      fecha:          [this.fechaRuta, Validators.required],
+      comercial:      [this.comercial, Validators.required],
+    });
   }
 
   ngOnInit(): void { }
@@ -112,6 +112,15 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
         this.addCliente(clientes[i], i);
       }
     });
+  }
+
+  mover(e: any){
+    console.log('moveria', e);
+
+    this.ruta.visitas.push(e);
+    this.clientesCard = this.clientesCard.filter( x => x.cliente_id !== e.cliente_id);
+    console.log(this.clientesCard);
+    console.log(this.ruta.visitas);
   }
 
   crearRuta() {
@@ -132,6 +141,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
           }).then((result) => {
             if (result.isConfirmed){
               this.ruta = ruta; // Asignamos la ruta que nos devuelve la base de datos
+              console.log(this.ruta);
               this.cargarVisitasRuta();
             }
           });
@@ -161,7 +171,6 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
   }
 
   abrirRuta(action: string = 'add' ) {
-
     switch (action) {
       case 'add':
       this.rutaService.crearRuta(this.ruta)
@@ -232,6 +241,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
 
             let visita: IVisita = {
               fecha: this.ruta.fecha,
+              tipo: 'RECOGIDA',
               cliente_id: this.ruta.visitas[i].cliente_id,
               orden: i,
               ruta_id: this.ruta._id || 0

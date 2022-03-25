@@ -8,6 +8,10 @@ mat-card-header {
     background: #009688;
 }
 
+mat-card-content {
+  font-size: 1em !important;
+}
+
 .left {
   float: left;
   width: 500px;
@@ -43,6 +47,7 @@ Timeline page
   list-style: none;
   max-width: 1200px;
   margin: 0 auto;
+
 }
 
 .timeline:before {
@@ -174,6 +179,7 @@ Timeline page
   margin-top: 0;
   color: inherit;
   font-weight: 400;
+  font-size: 1em;
 }
 
 .timeline-body > p,

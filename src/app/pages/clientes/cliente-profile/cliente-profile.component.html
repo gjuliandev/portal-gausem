@@ -54,89 +54,91 @@
   <div fxFlex.gt-sm="75" fxFlex="100">
       <mat-card>
           <mat-tab-group>
-              <!-- Tab 1 -->
-              <mat-tab label="Visitas">
-                  <mat-card-content>
-                      <div class="d-flex no-block" *ngFor="let visita of visitas">
-                        <div class="wrap">
-                          <div >
-                            <div fxLayout="row">
-                              <div class="m-r-20 b-r">
-                                <img class="img-circle" width="50" [src]="visita.img | imagen:'avatar'" alt="Image of {{visita.nombreComercial}}">
-                              </div>
-                              <div  fxLayout="column" fxLayoutAlign="center start" >
-                                <div>
-                                  <small class="text-muted">
-                                      <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'medium'}}
-                                  </small>
-                                </div>
-                                <h4>{{visita.nombre}}</h4>
-
-                                <div>
-                                  <small>ID Ruta</small> {{visita.idRuta}}
-                                </div>
-
-                              </div>
-
-                            </div>
+            <!-- Tab Dirección -->
+            <mat-tab label="Direccion">
+              <mat-card-content>
+                  <mat-card-title>Dirección</mat-card-title>
+                  <!-- ============================================================== -->
+                  <!-- column -->
+                  <!-- ============================================================== -->
+                  <form class="basic-form" [formGroup]="addressForm" >
+                      <div fxLayout="row wrap">
+                          <!-- column -->
+                          <div fxFlex.gt-sm="100" fxFlex="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Domicilio</mat-label>
+                              <input matInput type="text" placeholder="Domicilio" formControlName="domicilio">
+                            </mat-form-field>
                           </div>
-                        </div>
+                          <!-- column -->
+                          <div fxFlex.gt-sm="100" fxFlex="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Poblacion</mat-label>
+                              <input matInput type="text" placeholder="Poblacion" formControlName="poblacion">
+                            </mat-form-field>
+                          </div>
+                          <!-- column -->
+                          <div fxFlex.gt-sm="100" fxFlex="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Provincia</mat-label>
+                              <input matInput type="text" placeholder="Provincia" formControlName="provincia">
+                            </mat-form-field>
+                          </div>
+
+                          <!-- column -->
+                          <div fxFlex.gt-sm="100" fxFlex="100">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Código Postal</mat-label>
+                              <input matInput type="text" placeholder="Código Postal" formControlName="codPostal">
+                            </mat-form-field>
+                          </div>
+
+                          <!-- column -->
+                          <!-- <div fxFlex.gt-sm="100" fxFlex="100">
+                              <button mat-raised-button color="primary"></button>
+                          </div> -->
                       </div>
-                  </mat-card-content>
-              </mat-tab>
-              <!-- End Tab 1 -->
-              <!-- Tab 2 -->
-              <mat-tab label="Direccion">
-                  <mat-card-content>
-                      <mat-card-title>Dirección</mat-card-title>
-                      <!-- ============================================================== -->
-                      <!-- column -->
-                      <!-- ============================================================== -->
-                      <form class="basic-form" [formGroup]="addressForm" >
-                          <div fxLayout="row wrap">
-                              <!-- column -->
-                              <div fxFlex.gt-sm="100" fxFlex="100">
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Domicilio</mat-label>
-                                  <input matInput type="text" placeholder="Domicilio" formControlName="domicilio">
-                                </mat-form-field>
-                              </div>
-                              <!-- column -->
-                              <div fxFlex.gt-sm="100" fxFlex="100">
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Poblacion</mat-label>
-                                  <input matInput type="text" placeholder="Poblacion" formControlName="poblacion">
-                                </mat-form-field>
-                              </div>
-                              <!-- column -->
-                              <div fxFlex.gt-sm="100" fxFlex="100">
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Provincia</mat-label>
-                                  <input matInput type="text" placeholder="Provincia" formControlName="provincia">
-                                </mat-form-field>
-                              </div>
+                  </form>
 
-                              <!-- column -->
-                              <div fxFlex.gt-sm="100" fxFlex="100">
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Código Postal</mat-label>
-                                  <input matInput type="text" placeholder="Código Postal" formControlName="codPostal">
-                                </mat-form-field>
-                              </div>
+                  <button mat-button (click)="actualizarDireccion()" mat-flat-button color="primary"
+                    [disabled]="!addressForm.valid">Actualizar Direccion
+                  </button>
 
-                              <!-- column -->
-                              <!-- <div fxFlex.gt-sm="100" fxFlex="100">
-                                  <button mat-raised-button color="primary"></button>
-                              </div> -->
+              </mat-card-content>
+          </mat-tab>
+          <!-- End Tab Dirección -->
+
+           <!-- Tab Visistas -->
+           <mat-tab label="Visitas">
+            <mat-card-content>
+                <div class="d-flex no-block" *ngFor="let visita of visitas">
+                  <div class="wrap">
+                    <div >
+                      <div fxLayout="row">
+                        <div class="m-r-20 b-r">
+                          <img class="img-circle" width="50" [src]="visita.img | imagen:'avatar'" alt="Image of {{visita.nombreComercial}}">
+                        </div>
+                        <div  fxLayout="column" fxLayoutAlign="center start" >
+                          <div>
+                            <small class="text-muted">
+                                <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'medium'}}
+                            </small>
                           </div>
-                      </form>
+                          <h4>{{visita.nombre}}</h4>
 
-                      <button mat-button (click)="actualizarDireccion()" mat-flat-button color="primary"
-                        [disabled]="!addressForm.valid">Actualizar Direccion
-                      </button>
+                          <div>
+                            <small>ID Ruta</small> {{visita.idRuta}}
+                          </div>
 
-                  </mat-card-content>
-              </mat-tab>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </mat-card-content>
+        </mat-tab>
+        <!-- End Tab Visitas -->
           </mat-tab-group>
       </mat-card>
   </div>
