@@ -34,7 +34,7 @@ import { PipesModule } from './pipes/pipes.module';
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeEs, 'es');
+registerLocaleData(localeEs, 'es-ES');
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,7 +86,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     {
       provide: LOCALE_ID,
-      useValue: 'es'
+      useValue: 'es-ES'
     }
   ],
   bootstrap: [AppComponent]

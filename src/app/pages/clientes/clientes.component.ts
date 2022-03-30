@@ -46,8 +46,6 @@ export class ClientesComponent implements OnInit {
   }
 
   verDetalles(cliente: ICliente) {
-    console.log('vamo a ver los detalles de: ' + JSON.stringify(cliente));
-
     this.router.navigateByUrl('admin/clientes/'+cliente._id);
   }
 

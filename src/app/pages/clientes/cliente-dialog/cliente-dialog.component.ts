@@ -17,6 +17,7 @@ export class ClienteDialogComponent {
   constructor(public dialogRef: MatDialogRef<ClienteDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: ICliente,
               private fb: FormBuilder) {
+
                 this.local_data = { ...data };
                 this.action = this.local_data.action; //Add, Update, Delete
                 this.clientForm = this.fb.group({
@@ -33,7 +34,8 @@ export class ClienteDialogComponent {
                   fecha_alta: [this.local_data.fecha_alta, Validators.required],
                   renovacion_certificado: [this.local_data.renovacion_certificado],
                   proxima_visita: [this.local_data.proxima_visita]
-                })
+                });
+                
               }
 
 

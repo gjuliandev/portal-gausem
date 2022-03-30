@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +42,8 @@ export class ClientesService {
       cantidad_abonada:       cliente.cantidad_abonada,
       periodicidad:           cliente.periodicidad,
       consumo:                cliente.consumo,
-      fecha_alta:             cliente.fecha_alta,
-      renovacion_certificado: cliente.renovacion_certificado
+      fecha_alta:             moment(cliente.fecha_alta).format('YYYY-MM-DD'),
+      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD')
 
     };
     return this.http.post(url, newClient);
@@ -62,8 +63,8 @@ export class ClientesService {
       cantidad_abonada:       cliente.cantidad_abonada,
       periodicidad:           cliente.periodicidad,
       consumo:                cliente.consumo,
-      fecha_alta:             cliente.fecha_alta,
-      renovacion_certificado: cliente.renovacion_certificado
+      fecha_alta:             moment(cliente.fecha_alta).format('YYYY-MM-DD'),
+      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD')
     }
     return this.http.put(url, updateClient);
   }

@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './planificacion.component.html',
   styleUrls: ['./planificacion.component.scss']
 })
-export class PlanificacionComponent implements OnInit , OnDestroy{
+export class PlanificacionComponent implements OnDestroy{
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -47,7 +47,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
     }
   }
 
-  usuarios:     Array<ICliente> = []; // para el select de comerciales
+  usuarios: Array<ICliente> = []; // para el select de comerciales
 
   clientesCard: Array<any> = []; // Para el taskboard de clientes
   visitasCard:  Array<any> = []; // Para el taskboard de visitas
@@ -55,7 +55,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
   ruta:      IRuta =  Object.create(null);
   rutaForm:  FormGroup = Object.create(null);
   fechaRuta: any;
-  planifica: boolean = false; // Para mostrar los datos del tasckboard
+  planifica: boolean = true; // Para mostrar los datos del tasckboard
 
   // DATOS QUE VIENEN DEL OTRO FORMULARIO
   comercial: any = '';
@@ -79,6 +79,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
     if ( navigation?.extras.state) {
       this.comercial = navigation.extras.state.usuario_id;
       this.fechaRuta = navigation.extras.state.fecha;
+      
       this.rutaService.getRutaByParams( this.comercial, moment(this.fechaRuta).format('YYYY-MM-DD'))
         .subscribe( (ruta: IRuta) => {
           if (ruta) {
@@ -96,12 +97,11 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
     );
 
     this.rutaForm = this.fb.group({
-      fecha:          [this.fechaRuta, Validators.required],
-      comercial:      [this.comercial, Validators.required],
+      fecha:     [this.fechaRuta, Validators.required],
+      comercial: [this.comercial, Validators.required],
     });
   }
 
-  ngOnInit(): void { }
 
   findClientesAPlanificar() {
     this.clientesCard = [];
@@ -115,12 +115,8 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
   }
 
   mover(e: any){
-    console.log('moveria', e);
-
     this.ruta.visitas.push(e);
     this.clientesCard = this.clientesCard.filter( x => x.cliente_id !== e.cliente_id);
-    console.log(this.clientesCard);
-    console.log(this.ruta.visitas);
   }
 
   crearRuta() {
@@ -194,30 +190,44 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
 
   addCliente( cliente: any, index: number ) {
 
+    // Si hay cliente y le restan 0 días, entonces debemos de añadirlo directamente al array de visitas
+    // pero hay que tener cuidado que no este ya añadido 
     if (cliente && cliente.restan === 0) {
-          let visita: any = {
+      
+      let visita: any = {
+        cliente_id:      cliente._id,
+        nombreComercial: cliente.nombreComercial,
+        restan:          cliente.restan,
+        domicilio:       cliente.domicilio,
+        poblacion:       cliente.poblacion,
+        orden:           0,
+        ruta_id:         this.ruta._id,
+        persistente:     false
+      }
+      this.ruta.visitas.push(visita); // Añadimos el cliente al array de visitas
+         
+    } else {
+
+        console.log(this.clientesCard);
+        console.log(cliente._id);
+        if ( this.clientesCard.indexOf( cliente._id) > -1) {
+
+          console.log('el cliente ya etá en el array');
+
+        } else {
+
+          let newClientCard: any = {
             cliente_id:      cliente._id,
             nombreComercial: cliente.nombreComercial,
             restan:          cliente.restan,
             domicilio:       cliente.domicilio,
             poblacion:       cliente.poblacion,
             orden:           0,
-            ruta_id:         this.ruta._id,
-            persistente:     false
+            ruta_id:         this.ruta._id
           }
-          this.ruta.visitas.push(visita);
-    } else {
-        let newClientCard: any = {
-          cliente_id:      cliente._id,
-          nombreComercial: cliente.nombreComercial,
-          restan:          cliente.restan,
-          domicilio:       cliente.domicilio,
-          poblacion:       cliente.poblacion,
-          orden:           0,
-          ruta_id:         this.ruta._id
+          this.clientesCard.push(newClientCard); //Añadimos a clientes card
         }
-
-        this.clientesCard.push(newClientCard); //Añadimos a clientes card
+      
     }
   }
 
@@ -232,8 +242,12 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
     }).then((result) => {
       if (result.isConfirmed){
 
+        console.log('ha consentido guardar la ruta');
+
         this.visitasService.eliminarVisitasRuta(this.ruta._id)
         .subscribe( resp => {
+
+          console.log( resp );
 
           for (let i = 0; i < this.ruta.visitas.length; i ++) {
 
@@ -250,13 +264,10 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
               .subscribe();
 
             if (i == this.ruta.visitas.length - 1) {
-
               this.snackBar.open('Se ha guardado la planificación de la ruta correctamente', 'Guardar Visitas',       { duration: 2000 });
               this.router.navigateByUrl('/planificacion/rutas')
             }
           }
-
-
         }, error => this.snackBar.open('Se ha producido un error ' + error, 'Guardar Visitas',       { duration: 2000 }) );
       }
     });
@@ -277,8 +288,8 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
           .subscribe( resp => {
             this.ruta.visitas=[];
             this.findClientesAPlanificar();
-            this.snackBar.open('Visitas eliminadas correctamente', 'Reset Visitas',       { duration: 2000 });
-          }, (error) => this.snackBar.open('Se ha producido un error', 'Reset Visitas', { duration: 2000})
+            this.snackBar.open('Visitas eliminadas correctamente', 'Reset Visitas',       { duration: 1500 });
+          }, (error) => this.snackBar.open('Se ha producido un error', 'Reset Visitas', { duration: 1500})
         )};
     });
 
@@ -293,9 +304,7 @@ export class PlanificacionComponent implements OnInit , OnDestroy{
     });
   }
 
-  showClients(e: any) {
-    console.log(e);
-  }
+  applyFilter(term: string = ''){}
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

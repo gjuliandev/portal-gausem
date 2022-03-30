@@ -35,7 +35,7 @@
         </div>
 
         <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-hourglass-o p-10"></i>{{ ruta.duracion |  horasFromMinutes }}
+          <i class="fa fa-hourglass-o p-10"></i>{{ ruta.duracion | horasFromMinutes }}
         </div>
       </div>
 
@@ -97,7 +97,7 @@
                           <h5 class="timeline-title">Datos Entrega:</h5>
                         </div>
                         <div fxFlex.gt-sm="66" fxFlex.gt-xs="30" class="p-5">
-                          <h5 class="timeline-title">{{visita.entregado}} €</h5>
+                          <h5 class="timeline-title">{{visita.entregado || 0}} €</h5>
                         </div>
 
                       </div>

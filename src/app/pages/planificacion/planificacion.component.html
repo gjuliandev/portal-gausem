@@ -32,11 +32,11 @@
               </mat-form-field>
             </div>
           </div>
-
+            <button mat-button type="submit" mat-flat-button color="primary"
+              [disabled]="!rutaForm.valid"> Abrir Ruta
+            </button>
           </form>
-          <button mat-button (click)="crearRuta()" mat-flat-button color="primary"
-            [disabled]="!rutaForm.valid"> Abrir Ruta
-          </button>
+          
         </mat-card-content>
       </mat-card>
 
@@ -46,6 +46,23 @@
 
         <mat-checkbox class="m-l-20" (change)="showClients($event.checked)">Mostrar más</mat-checkbox>
 
+      </div> -->
+
+      <!-- Busqueda de clientes -->
+      <!-- <div fxLayout="row wrap">
+        <div fxFlex="100">
+          <mat-card>
+            <mat-card-content>
+              <div fxLayout="row wrap" class="align-items-center">
+                <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex.gt-xl="25" fxFlex="100">
+                  <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Cliente">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div> -->
       <!-- CLIENTES CARD-->
       <div class="taskboard-wrapper b-r" *ngIf="planifica">
@@ -91,7 +108,7 @@
           <div class="taskboard-cards" id="route" #route [cdkDropListData]="ruta.visitas" cdkDropList (cdkDropListDropped)="drop($event)">
             <div class="taskboard-task b-b" cdkDrag *ngFor="let visita of ruta.visitas; index as i; ">
 
-              <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}} <span *ngIf="!visita.persistente">*</span></div>
+              <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}} <span *ngIf="!visita.persistente">**</span></div>
 
               <div>
                 <span class=" task-decription text-muted">

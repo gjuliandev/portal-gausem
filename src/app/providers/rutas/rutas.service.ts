@@ -35,6 +35,14 @@ export class RutasService {
       );
   }
 
+  getRutasByUser ( idUsuario: number = 0 ) {
+    const url = `${environment.base_url}/rutas/usuario/${idUsuario}`;
+    return this.http.get(url)
+      .pipe(
+        map( (res: any) => res['payload'][0])
+      );
+  }
+
   getDetalleRuta ( id: number ) {
     const url = `${environment.base_url}/rutas/detalle/${id}`;
     return this.http.get(url)
@@ -44,7 +52,7 @@ export class RutasService {
   }
 
   crearRuta( ruta: IRuta) {
-    console.log('la nueva ruta es ' + JSON.stringify(ruta) );
+    
     const url = `${environment.base_url}/rutas`;
     const newRuta = {
       fecha:               ruta.fecha,
