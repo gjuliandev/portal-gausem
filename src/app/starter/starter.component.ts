@@ -8,5 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./starter.component.scss']
 })
 export class StarterComponent implements AfterViewInit {
+  isLoaing = false;
+
   ngAfterViewInit() {}
 }

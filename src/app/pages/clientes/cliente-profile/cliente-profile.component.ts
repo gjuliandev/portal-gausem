@@ -58,8 +58,17 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
       this.clienteResolver.onVisitasChanged
         .pipe( takeUntil(this.unsubscribeAll) )
         .subscribe( (items: Array<any>) => {
-            this.visitas = items;
+            this.visitas = items; 
+            console.log(this.visitas);         
       });
+  }
+
+  getSumKilos(){
+    return this.visitas.reduce((sum, current) => sum + current.kilos, 0);
+  }
+
+  getSumEntregado() {
+    return this.visitas.reduce((sum, current) => sum + current.entregado, 0);
   }
 
   crearFormulario(accion: string) {
@@ -75,10 +84,10 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   actualizarDireccion() {
 
     const newDireccion: IDireccion = {
-      domicilio: this.addressForm.value.domicilio,
-      poblacion: this.addressForm.value.poblacion,
-      provincia: this.addressForm.value.provincia,
-      codPostal: this.addressForm.value.codPostal,
+      domicilio:  this.addressForm.value.domicilio,
+      poblacion:  this.addressForm.value.poblacion,
+      provincia:  this.addressForm.value.provincia,
+      codPostal:  this.addressForm.value.codPostal,
       cliente_id: this.cliente._id
     }
 

@@ -47,6 +47,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Visitas realizadas ({{visitas.length}})</mat-card-title>
+      <!-- <button mat-raised-button (click)="openDialog('Add',{})" >Nueva Visita</button> -->
     </mat-card-header>
     <mat-card-content>
         <ul class="timeline" *ngFor="let visita of visitas">
@@ -62,11 +63,11 @@
                           <h6 class="timeline-title orden">nº {{visita.orden + 1 }}</h6>
                         </div>
                         <div fxFlex.gt-sm="75" fxFlex.gt-xs="50" class="p-20">
-                          <h4 class="timeline-title">{{visita.nombreComercial}}</h4>
+                          <h4 class="timeline-title"><strong>{{visita.nombreComercial}}</strong></h4>
                         </div>
-                        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-5">
+                        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-5" *ngIf="visita.isVisited">
                           <small class="text-muted">
-                              <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'shortTime'}}
+                              <i class="fa fa-clock-o"></i> <strong>{{visita.fecha | date: 'shortTime'}}</strong>
                           </small>
                         </div>
                       </div>
@@ -78,7 +79,7 @@
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5">
                         </div>
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA' && visita.nAlbaran" >
-                          <h5 class="timeline-title">nº albarán {{visita.nAlbaran}}</h5>
+                          <h5 class="timeline-title">nº albarán <strong>{{visita.nAlbaran}}</strong></h5>
                         </div>
                       </div>
                       <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" *ngIf="visita.tipo === 'RECOGIDA'">
@@ -86,10 +87,10 @@
                           <h5 class="timeline-title">Datos Recogida:</h5>
                         </div>
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA'">
-                          <h5 class="timeline-title">{{visita.bidones}} Bidones</h5>
+                          <h5 class="timeline-title"><strong>{{visita.bidones}} Bidones</strong></h5>
                         </div>
                         <div fxFlex.gt-sm="33" fxFlex.gt-xs="30" class="p-5" *ngIf="visita.tipo === 'RECOGIDA'">
-                          <h5 class="timeline-title">{{visita.kilos}} Kilos</h5>
+                          <h5 class="timeline-title"><strong>{{visita.kilos}} Kilos</strong></h5>
                         </div>
                       </div>
                       <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px" *ngIf="visita.tipo === 'RECOGIDA'">
@@ -97,15 +98,19 @@
                           <h5 class="timeline-title">Datos Entrega:</h5>
                         </div>
                         <div fxFlex.gt-sm="66" fxFlex.gt-xs="30" class="p-5">
-                          <h5 class="timeline-title">{{visita.entregado || 0}} €</h5>
+                          <h5 class="timeline-title"><strong>{{visita.entregado || 0}} €</strong></h5>                         
                         </div>
-
+                      </div>
+                      <div class="timeline-body" *ngIf="visita.notas">
+                        <small>Notas:</small>
+                        <p>{{visita.notas}}</p>
+                      </div>
+                      <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">   
+                        <button mat-raised-button (click)="openDialog('Update', visita)" >Editar</button>
+                        <button mat-raised-button color="warn" (click)="openDialog('Delete', visita)">Eliminar</button>
                       </div>
                     </div>
-                    <div class="timeline-body" *ngIf="visita.notas">
-                        <small>notas:</small>
-                        <p>{{visita.notas}}</p>
-                    </div>
+                    
                 </div>
             </li>
         </ul>

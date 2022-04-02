@@ -34,6 +34,8 @@ import { PipesModule } from './pipes/pipes.module';
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+
+
 registerLocaleData(localeEs, 'es-ES');
 
 export function HttpLoaderFactory(http: HttpClient) {

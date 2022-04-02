@@ -4,7 +4,7 @@
       Detalles del Cliente
     </mat-card-title>
     <mat-card-subtitle>
-      {{cliente.nombreComercial}}
+      #{{cliente._id}} - {{cliente.nombreComercial}}
     </mat-card-subtitle>
   </mat-card-header>
 </mat-card>
@@ -14,7 +14,7 @@
 <!-- ============================================================== -->
 <div fxLayout="row wrap">
   <!-- Card column -->
-  <div fxFlex.gt-sm="25" fxFlex="100">
+  <div fxFlex.gt-sm="30" fxFlex="100">
       <mat-card class="oh text-center little-profile">
           <img mat-card-image src="assets/images/restaurants/profile.jpg" alt="Photo of a Shiba Inu">
           <mat-card-content>
@@ -34,16 +34,16 @@
             </mat-card-actions>
               <div fxLayout="row" fxLayoutWrap="wrap" class="m-t-30">
                   <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100">
-                      <h3 class="m-0 font-light">1099</h3>
+                      <h3 class="m-0 font-light">{{visitas.length}}</h3>
                       <small>Total Visitas</small>
                   </div>
                   <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100">
-                      <h3 class="m-0 font-light">23,469 L</h3>
+                      <h3 class="m-0 font-light"> {{ getSumKilos() }} Kilos</h3>
                       <small>Total Recogido</small>
                   </div>
                   <div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="33.33%" fxFlex="100">
-                      <h3 class="m-0 font-light">{{cliente.proxima_visita | date: 'mediumDate' || '--'}} </h3>
-                      <small>Próxima Visita</small>
+                      <h3 class="m-0 font-light">{{ getSumEntregado() }} </h3>
+                      <small>Total Entregado</small>
                   </div>
               </div>
           </mat-card-content>
@@ -51,94 +51,121 @@
   </div>
   <!-- Card column -->
   <!-- Card column -->
-  <div fxFlex.gt-sm="75" fxFlex="100">
+  <div fxFlex.gt-sm="70" fxFlex="100">
       <mat-card>
           <mat-tab-group>
+          
             <!-- Tab Dirección -->
             <mat-tab label="Direccion">
+                <mat-card-content>
+                    <mat-card-title>Dirección</mat-card-title>
+                    <!-- ============================================================== -->
+                    <!-- column -->
+                    <!-- ============================================================== -->
+                    <form class="basic-form" [formGroup]="addressForm" >
+                        <div fxLayout="row wrap">
+                            <!-- column -->
+                            <div fxFlex.gt-sm="100" fxFlex="100">
+                              <mat-form-field appearance="outline">
+                                <mat-label>Domicilio</mat-label>
+                                <input matInput type="text" placeholder="Domicilio" formControlName="domicilio">
+                              </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="100" fxFlex="100">
+                              <mat-form-field appearance="outline">
+                                <mat-label>Poblacion</mat-label>
+                                <input matInput type="text" placeholder="Poblacion" formControlName="poblacion">
+                              </mat-form-field>
+                            </div>
+                            <!-- column -->
+                            <div fxFlex.gt-sm="100" fxFlex="100">
+                              <mat-form-field appearance="outline">
+                                <mat-label>Provincia</mat-label>
+                                <input matInput type="text" placeholder="Provincia" formControlName="provincia">
+                              </mat-form-field>
+                            </div>
+
+                            <!-- column -->
+                            <div fxFlex.gt-sm="100" fxFlex="100">
+                              <mat-form-field appearance="outline">
+                                <mat-label>Código Postal</mat-label>
+                                <input matInput type="text" placeholder="Código Postal" formControlName="codPostal">
+                              </mat-form-field>
+                            </div>
+
+                            <!-- column -->
+                            <!-- <div fxFlex.gt-sm="100" fxFlex="100">
+                                <button mat-raised-button color="primary"></button>
+                            </div> -->
+                        </div>
+                    </form>
+
+                    <button mat-button (click)="actualizarDireccion()" mat-flat-button color="primary"
+                      [disabled]="!addressForm.valid">Actualizar Direccion
+                    </button>
+
+                </mat-card-content>
+            </mat-tab>
+            <!-- End Tab Dirección -->
+
+            <!-- Tab Visistas -->
+            <mat-tab label="Visitas">
               <mat-card-content>
-                  <mat-card-title>Dirección</mat-card-title>
-                  <!-- ============================================================== -->
-                  <!-- column -->
-                  <!-- ============================================================== -->
-                  <form class="basic-form" [formGroup]="addressForm" >
-                      <div fxLayout="row wrap">
-                          <!-- column -->
-                          <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Domicilio</mat-label>
-                              <input matInput type="text" placeholder="Domicilio" formControlName="domicilio">
-                            </mat-form-field>
-                          </div>
-                          <!-- column -->
-                          <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Poblacion</mat-label>
-                              <input matInput type="text" placeholder="Poblacion" formControlName="poblacion">
-                            </mat-form-field>
-                          </div>
-                          <!-- column -->
-                          <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Provincia</mat-label>
-                              <input matInput type="text" placeholder="Provincia" formControlName="provincia">
-                            </mat-form-field>
-                          </div>
-
-                          <!-- column -->
-                          <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Código Postal</mat-label>
-                              <input matInput type="text" placeholder="Código Postal" formControlName="codPostal">
-                            </mat-form-field>
-                          </div>
-
-                          <!-- column -->
-                          <!-- <div fxFlex.gt-sm="100" fxFlex="100">
-                              <button mat-raised-button color="primary"></button>
-                          </div> -->
-                      </div>
-                  </form>
-
-                  <button mat-button (click)="actualizarDireccion()" mat-flat-button color="primary"
-                    [disabled]="!addressForm.valid">Actualizar Direccion
-                  </button>
-
-              </mat-card-content>
-          </mat-tab>
-          <!-- End Tab Dirección -->
-
-           <!-- Tab Visistas -->
-           <mat-tab label="Visitas">
-            <mat-card-content>
-                <div class="d-flex no-block" *ngFor="let visita of visitas">
-                  <div class="wrap">
-                    <div >
-                      <div fxLayout="row">
-                        <div class="m-r-20 b-r">
+                  <div class="d-flex no-block" *ngFor="let visita of visitas">
+                    <div class="wrap">
+                      <div fxLayout="row" class="m-b-20">
+                        
+                        <div fxFlex.gt-sm="15" fxFlex="15" class="m-r-20 b-r">
                           <img class="img-circle" width="50" [src]="visita.img | imagen:'avatar'" alt="Image of {{visita.nombreComercial}}">
                         </div>
-                        <div  fxLayout="column" fxLayoutAlign="center start" >
-                          <div>
-                            <small class="text-muted">
-                                <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'medium'}}
+                        <div fxFlex.gt-sm="85" fxFlex="85">
+
+                          <div fxLayout="row wrap">
+                            <small class="text-muted" fxFlex.gt-sm="100" fxFlex="100">
+                              <i class="fa fa-clock-o"></i> {{visita.fecha | date: 'medium'}}
                             </small>
                           </div>
-                          <h4>{{visita.nombre}}</h4>
 
-                          <div>
-                            <small>ID Ruta</small> {{visita.idRuta}}
+                          <div fxLayout="row wrap">
+                            <div fxFlex.gt-sm="33" fxFlex="33" fxLayoutAlign="start start">
+                              <p>Comercial: <strong>{{ visita.nombre }} </strong></p>
+                            </div>
+                            <div fxFlex.gt-sm="33" fxFlex="33" fxLayoutAlign="center start">
+                              <p>Recogido: <strong>{{ visita.kilos ||0 }} Kilos </strong></p>
+                            </div>
+                            <div fxFlex.gt-sm="33" fxFlex="33" fxLayoutAlign="center start">
+                              <p>Entregado: <strong>{{ visita.entregado || 0 }} € </strong></p>
+                            </div>
                           </div>
-
+                          
                         </div>
-
+                        <hr>
                       </div>
                     </div>
                   </div>
-                </div>
-            </mat-card-content>
-        </mat-tab>
-        <!-- End Tab Visitas -->
+              </mat-card-content>
+            </mat-tab>
+            <!-- End Tab Visitas -->
+
+            <!-- Tab Visistas -->
+            <mat-tab label="Logo">
+              <mat-card-content>
+                  
+                    <div class="wrap">
+                      <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+                        
+                        <div class="m-r-20" >
+                          <img class="img-circle" width="200" [src]="cliente.img | imagen:'avatar'" alt="Image of {{cliente.nombreComercial}}">
+                        </div>
+                        
+                      </div>
+                    </div>
+                  
+              </mat-card-content>
+            </mat-tab>
+            <!-- End Tab Visitas -->
+
           </mat-tab-group>
       </mat-card>
   </div>

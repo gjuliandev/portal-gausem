@@ -14,6 +14,7 @@ import { ClienteProfileComponent } from './clientes/cliente-profile/cliente-prof
 import { ListRutasComponent } from './rutas/list-rutas/list-rutas.component';
 import { DetallesRutaComponent } from './rutas/detalles-ruta/detalles-ruta.component';
 import { PlanificacionComponent } from './planificacion/planificacion.component';
+import { VisitaDialogComponent } from './rutas/visita-dialog/visita-dialog.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PlanificacionComponent } from './planificacion/planificacion.component'
                   ClienteProfileComponent,
                   ListRutasComponent,
                   DetallesRutaComponent,
-                  PlanificacionComponent],
+                  PlanificacionComponent,
+                  VisitaDialogComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

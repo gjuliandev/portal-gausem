@@ -204,7 +204,7 @@ export class PlanificacionComponent implements OnDestroy{
         ruta_id:         this.ruta._id,
         persistente:     false
       }
-      this.ruta.visitas.push(visita); // Añadimos el cliente al array de visitas
+      // this.ruta.visitas.push(visita); // Añadimos el cliente al array de visitas
          
     } else {
 
@@ -232,6 +232,7 @@ export class PlanificacionComponent implements OnDestroy{
   }
 
   guardarRuta() {
+
     Swal.fire({
       title: 'Guardar Ruta',
       text: 'Esta a punto de guardar las visitas de la Ruta, ¿Está seguro?',

@@ -1,0 +1,65 @@
+
+<h2 class="font-medium" mat-dialog-title><strong>{{action}}</strong></h2>
+
+<mat-dialog-content class="pb-3" *ngIf="action != 'Delete'; else elseTemplate">
+
+  <form [formGroup]="visitaForm" (ngSubmit)="doAction()">
+
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+      <!-- col full bidones-->
+      <div fxFlex.gt-lg="40" fxFlex="100" >
+        <mat-form-field appearance="outline">
+          <mat-label>Nº Bidones</mat-label>
+          <input matInput type="text" placeholder="Bidones" formControlName="bidones">
+        </mat-form-field>
+      </div>
+
+      <div fxFlex.gt-lg="40" fxFlex="100" >
+        <mat-form-field appearance="outline">
+          <mat-label>Kilos Recogidos</mat-label>
+          <input matInput type="text" placeholder="Kilos" formControlName="kilos">
+        </mat-form-field>
+      </div>
+
+      <div fxFlex.gt-lg="40" fxFlex="100" >
+        <mat-form-field appearance="outline">
+          <mat-label>€ Entregados</mat-label>
+          <input matInput type="text" placeholder="Entregado" formControlName="entregado">
+        </mat-form-field>
+      </div>
+
+      <div fxFlex.gt-lg="40" fxFlex="100" >
+        <mat-form-field appearance="outline">
+          <mat-label>Nº Albarán</mat-label>
+          <input matInput type="text" placeholder="Nº Albarán" formControlName="nAlbaran">
+        </mat-form-field>
+      </div>
+
+      <!-- col half notas -->
+      <div fxFlex.gt-lg="100" fxFlex="100">
+        <mat-form-field appearance="outline">
+          <mat-label>Notas</mat-label>
+          <textarea matInput
+            type="text"
+            placeholder="Notas"
+            formControlName="notas"
+            cdkTextareaAutosize
+            rows="5"></textarea>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <button mat-button type="submit" mat-flat-button color="warn"
+    [disabled]="!visitaForm.valid">{{action}}</button>
+      <button mat-button (click)="closeDialog()">Cancelar</button>
+    
+    </form>
+  </mat-dialog-content>
+  
+  <ng-template #elseTemplate>
+    <p>¿Seguro que desea eliminar la visita al cliente <b>{{local_data.nombreComercial}}</b> ?</p>
+    <div mat-dialog-actions align="end" class="pt-3">
+        <button mat-button (click)="doAction()" mat-flat-button color="warn">{{action}}</button>
+        <button mat-button (click)="closeDialog()">Cancelar</button>
+    </div>
+  </ng-template>
