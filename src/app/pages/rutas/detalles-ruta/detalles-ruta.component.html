@@ -1,45 +1,30 @@
 <div>
   <mat-card>
     <mat-card-header>
-      <mat-card-subtitle>
-        Datos de la Ruta
-      </mat-card-subtitle>
+      <mat-card-title>
+        Datos de la Ruta realizada por <strong>{{ruta.nombre_usuario}}</strong>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
 
       <div fxLayout="row" fxLayoutAlign="start center">
 
-        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-clock-o p-10"></i> {{ruta.fecha | date: 'mediumDate'}}
+        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+          <i class="fa fa-clock-o p-10"></i><strong>{{ruta.fecha | date: 'mediumDate'}}</strong>
         </div>
 
-          <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
-            <i class="fa fa-user-o p-10"></i> {{ruta.nombre_usuario}}
-          </div>
-
-      </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-hourglass-start p-10"></i>{{ ruta.inicio | date: 'shortTime'}}
+        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+          <i class="fa fa-hourglass-start p-10"></i><strong>{{ ruta.inicio | date: 'shortTime'}} horas</strong>
         </div>
 
-        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-hourglass-end p-10"></i>{{ ruta.fin | date: 'shortTime'}}
+        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+          <i class="fa fa-hourglass-end p-10"></i><strong>{{ ruta.fin | date: 'shortTime'}} horas</strong>
+        </div>
+
+        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+          <i class="fa fa-hourglass-o p-10"></i>Duración <strong>{{ ruta.duracion | horasFromMinutes }}</strong>
         </div>
       </div>
-
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex.gt-sm="50" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-paper-plane-o p-10"></i>{{ ruta.kilometros }} Km
-        </div>
-
-        <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" class="p-20">
-          <i class="fa fa-hourglass-o p-10"></i>{{ ruta.duracion | horasFromMinutes }}
-        </div>
-      </div>
-
-
     </mat-card-content>
   </mat-card>
 </div>
@@ -47,7 +32,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>Visitas realizadas ({{visitas.length}})</mat-card-title>
-      <!-- <button mat-raised-button (click)="openDialog('Add',{})" >Nueva Visita</button> -->
+      <mat-card-subtitle class="white">Kilos recogidos: <strong>{{ getSumKilos() }} Kilos </strong> Total (€) entregados: <strong>{{ getSumEntregado() }}€</strong></mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <ul class="timeline" *ngFor="let visita of visitas">

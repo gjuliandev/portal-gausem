@@ -1,8 +1,7 @@
-import { ThisReceiver } from '@angular/compiler';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
-import { by } from 'protractor';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IDireccion } from 'src/app/interfaces/direccion';
@@ -68,8 +67,7 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
       this.clienteResolver.onVisitasChanged
         .pipe( takeUntil(this.unsubscribeAll) )
         .subscribe( (items: Array<any>) => {
-            this.visitas = items; 
-            console.log(this.visitas);         
+            this.visitas = items;         
       });
   }
 

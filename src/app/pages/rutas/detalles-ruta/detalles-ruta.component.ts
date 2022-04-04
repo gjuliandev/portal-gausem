@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IRuta } from 'src/app/interfaces/ruta';
+
 import { IVisita } from 'src/app/interfaces/visita';
 import { VisitasService } from 'src/app/providers/visitas/visitas.service';
 import { RutasResolver } from 'src/app/resolvers/rutas.resolver';
@@ -15,7 +15,7 @@ import { VisitaDialogComponent } from '../visita-dialog/visita-dialog.component'
 })
 export class DetallesRutaComponent implements OnInit, OnDestroy {
   ruta: any;
-  visitas: Array<IVisita> = [];
+  visitas: Array<any> = [];
   isLoaing = true;
   hayDatos = true;
   private unsubscribeAll: Subject<any> = new Subject();
@@ -23,6 +23,7 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
   constructor( private rutaResolver: RutasResolver, private dialog: MatDialog, private visitasService: VisitasService) { }
 
   ngOnInit(): void {
+    
     this.rutaResolver.onRutaChanged
     .pipe( takeUntil(this.unsubscribeAll) )
     .subscribe( resp => {
@@ -34,12 +35,18 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
     .pipe( takeUntil(this.unsubscribeAll) )
     .subscribe( visitas => {
       this.visitas = visitas
-      console.log(visitas);
     });
   }
 
+  getSumKilos(){
+    return this.visitas.reduce((sum, current) => sum + current.kilos, 0);
+  }
 
-openDialog(action: string, obj: any) {
+  getSumEntregado() {
+    return this.visitas.reduce((sum, current) => sum + current.entregado, 0);
+  }
+
+  openDialog(action: string, obj: any) {
 
     obj.action = action; // Añadimos al objeto cliente el campo action (Add, Update, Delete)
 

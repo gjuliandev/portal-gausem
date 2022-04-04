@@ -1,1 +1,7 @@
-<p>kilosxrestaurante works!</p>
+
+<highcharts-chart 
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+  *ngIf="chartOptions && chartData.length > 0"
+  style="width: 100%; height: 400px; display: block;"
+></highcharts-chart>

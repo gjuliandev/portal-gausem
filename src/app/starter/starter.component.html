@@ -1,13 +1,15 @@
+
+
 <!-- ============================================================== -->
 <!-- Simple four boxes Row -->
 <!-- ============================================================== -->
 <div fxLayout="row" fxLayoutWrap="wrap">
     <!-- column -->
     <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
-        <mat-card>
+        <mat-card class="bg-success">
             <mat-card-content>
                 <!-- Row -->
-                <div fxLayout="row" fxLayoutWrap="wrap">
+                <div class="white"fxLayout="row" fxLayoutWrap="wrap">
                     <!-- column -->
                     <div fxFlex.gt-sm="50" fxFlex.gt-xs="50">
                         DASHBOARD
@@ -19,32 +21,40 @@
     <!-- column -->
 </div>
 
+<!-- BOXES 4 -->
+<div fxLayout="row wrap" >
+    <div fxFlex="25" *ngFor="let kpi of kpis">
+        <div class="loading-indicator row" *ngIf="isLoaing">
+            <mat-spinner class="inner"></mat-spinner>
+        </div>
+
+        <app-box [titulo]="kpi.titulo" [subtitulo]="kpi.subtitulo" [valor]="kpi.valor"></app-box>
+    </div>
+</div>
+
+<!-- GRAFICAS 2 -->
 <div fxLayout="row wrap">
 
     <div fxFlex="50">
         <mat-card>
-            <mat-card-header>
-                Grafico Kilos X Restaurante
-            </mat-card-header>
+           
             <mat-card-content>
               <div class="loading-indicator row" *ngIf="isLoaing">
                 <mat-spinner class="inner"></mat-spinner>
             </div>
-            <!-- <app-kilosxrestaurante></app-kilosxrestaurante> -->
+            <app-kilosxrestaurante></app-kilosxrestaurante>
           </mat-card-content>
         </mat-card>
     </div>
 
     <div fxFlex="50">
         <mat-card>
-            <mat-card-header>
-                Grafico Restaurantes X Mes
-            </mat-card-header>
+            
             <mat-card-content>
               <div class="loading-indicator row" *ngIf="isLoaing">
                 <mat-spinner class="inner"></mat-spinner>
             </div>
-            <!--  <app-kilosxmes></app-kilosxmes>-->
+              <app-kilosxmes></app-kilosxmes>
           </mat-card-content>
         </mat-card>
     </div>

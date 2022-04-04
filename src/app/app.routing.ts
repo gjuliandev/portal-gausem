@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AppBlankComponent } from './layouts/blank/blank.component';
 
 import { FullComponent } from './layouts/full/full.component';
+import { DashboardResolver } from './resolvers/dashboard.resolver';
 
 export const AppRoutes: Routes = [
     {
@@ -15,7 +16,8 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'starter',
-                loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)
+                loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule),
+                resolve: { dashboard: DashboardResolver  },
             },
             {
               path: 'admin',
