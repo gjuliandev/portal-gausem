@@ -1,11 +1,14 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { by } from 'protractor';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IDireccion } from 'src/app/interfaces/direccion';
 import { ClientesService } from 'src/app/providers/clientes/clientes.service';
 import { DireccionesService } from 'src/app/providers/direcciones/direcciones.service';
+import { SubirFicheroService } from 'src/app/providers/ficheros/subir-fichero.service';
 import { ClienteResolver } from 'src/app/resolvers/cliente.resolver';
 import Swal from 'sweetalert2';
 
@@ -19,6 +22,11 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   cliente:   any = null;
   direccion: any = null;
   visitas:   Array<any> = [];
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  file: File = Object(null);
+
   private unsubscribeAll: Subject<any> = new Subject();
 
   addressForm: FormGroup = Object.create(null);
@@ -28,7 +36,9 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   constructor( private clienteResolver: ClienteResolver,
                private clienteService: ClientesService,
                private fb: FormBuilder,
-               private direccionesService: DireccionesService ) { }
+               private direccionesService: DireccionesService,
+               private subirFicheroService: SubirFicheroService
+                ) { }
 
   ngOnInit(): void {
       this.clienteResolver.onClienteChanged
@@ -144,6 +154,50 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
       );
       this.clienteResolver.findCliente(this.cliente._id).then();
     });
+  }
+
+
+  // IMAGEN
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64;
+      const imageName = 'image.png';
+      const imageBlob = this.dataURItoBlob(this.croppedImage);
+      const imageFile = new File([imageBlob], imageName, {type: 'image/png'});
+      this.file = imageFile;
+  }
+
+  dataURItoBlob(croppedImage: any) {
+   const byteString = atob(croppedImage.split(',')[1]);
+   const mimeString = croppedImage.split(',')[0].split(':')[1].split(';')[0];
+   const ab = new ArrayBuffer(byteString.length);
+   const ia = new Uint8Array(ab);
+   for (let i = 0; i < byteString.length; i++) {
+     ia[i] = byteString.charCodeAt(i);
+   }
+
+   const blob = new Blob([ab], {type: mimeString});
+   return blob; 
+  }
+
+  imageLoaded(image: LoadedImage) {
+      // show cropper
+  }
+  cropperReady() {
+      // cropper ready
+  }
+  loadImageFailed() {
+      // show message
+  }
+
+  guardarLogo() {
+    if (this.file) {
+      this.subirFicheroService.upload(this.file, 'logo', this.cliente._id)
+        .then( x=> console.log('subido') );
+    }
   }
 
   ngOnDestroy(): void {

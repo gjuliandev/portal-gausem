@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import * as Chartist from 'chartist';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { ClientesService } from 'src/app/providers/clientes/clientes.service';
 import { ClienteDialogComponent } from './cliente-dialog/cliente-dialog.component';
@@ -16,11 +17,13 @@ import { ClienteDialogComponent } from './cliente-dialog/cliente-dialog.componen
 export class ClientesComponent implements OnInit {
 
   dataSource = new MatTableDataSource([]);
-  displayedColumns = [ 'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'renovacion_certificado', 'proxima_visita', 'action']
+  displayedColumns = ['logo',  'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'renovacion_certificado', 'proxima_visita', 'action']
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator = Object.create(null);
   @ViewChild(MatSort, { static: true }) sort: MatSort = Object.create(null);
   isLoaing = true;
   hayDatos = true;
+
+  mostrarTodos = false;
 
   constructor(private dialog: MatDialog,
               private clienteService: ClientesService,
@@ -37,7 +40,7 @@ export class ClientesComponent implements OnInit {
   }
 
   findAllClientes() {
-    this.clienteService.getClientes()
+    this.clienteService.getClientes(!this.mostrarTodos)
     .subscribe( (clientes)=> {
       this.dataSource.data = clientes;
       this.isLoaing =false;
@@ -53,7 +56,10 @@ export class ClientesComponent implements OnInit {
 
     obj.action = action; // Añadimos al objeto cliente el campo action (Add, Update, Delete)
 
-    const dialogRef = this.dialog.open(ClienteDialogComponent, {data: obj, disableClose: true});
+    const dialogRef = this.dialog.open(ClienteDialogComponent, {
+      data: obj, 
+      disableClose: true
+    });
 
     dialogRef.afterClosed()
       .subscribe( result => {
@@ -86,6 +92,14 @@ export class ClientesComponent implements OnInit {
       });
   }
 
-
-
+  toggleCoompleted( e: any ) {
+   
+    if (e.checked === true) {
+      this.mostrarTodos = true;
+      this.findAllClientes();
+    } else {
+      this.mostrarTodos = false;
+      this.findAllClientes();
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-kilosxmes',
   templateUrl: './kilosxmes.component.html',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KilosxmesComponent implements OnInit {
 
+  
   constructor() { }
 
   ngOnInit(): void {

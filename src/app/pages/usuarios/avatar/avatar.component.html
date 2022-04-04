@@ -1,0 +1,37 @@
+<mat-card>
+    <mat-dialog-content>
+                  
+        <div class="wrap">
+          <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+            
+            <img class="img-circle" width="200" [src]="this.local_data.img | imagen:'avatar'" alt="Image of {{ this.local_data.nombre }}" 
+              *ngIf="!croppedImage" (click)="fileInput.click()">
+            <img class="img-circle" width="200"  [src]="croppedImage" alt="Image of avatar" *ngIf="croppedImage" (click)="fileInput.click()">
+              
+            <input #fileInput hidden type="file" (change)="fileChangeEvent($event)" />
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+            <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded(this.local_data.img)"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+            <mat-card-actions *ngIf="croppedImage" >
+              <button mat-flat-button color="primary"  (click)="doAction()">Guardar</button>
+              <button mat-button (click)="closeDialog()">Cancelar</button>
+            </mat-card-actions>
+          </div>
+         
+        </div>
+      
+  </mat-dialog-content>
+</mat-card>

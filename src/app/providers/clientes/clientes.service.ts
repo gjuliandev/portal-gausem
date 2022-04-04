@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ICliente } from 'src/app/interfaces/cliente';
@@ -20,9 +20,14 @@ export class ClientesService {
       );
   }
 
-  getClientes() {
+  getClientes(abonado: boolean = false) {
+
     const url = `${environment.base_url}/clientes`;
-    return this.http.get(url)
+
+    return this.http.get(url, {
+      params: new HttpParams()
+        .set( 'abonado', abonado.toString())
+    })
       .pipe(
         map( (res: any) => res['payload'])
       );

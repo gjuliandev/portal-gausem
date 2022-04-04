@@ -34,6 +34,7 @@ import { PipesModule } from './pipes/pipes.module';
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+  
 
 
 registerLocaleData(localeEs, 'es-ES');
@@ -69,9 +70,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     HttpClientModule,
     SharedModule,
+    
     RouterModule.forRoot(AppRoutes),
     ReactiveFormsModule,
     HttpClientModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from 'src/app/providers/usuarios/usuario.service';
+import { AvatarComponent } from '../avatar/avatar.component';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
@@ -59,5 +60,21 @@ export class UsuariosComponent implements OnInit {
         }
       });
   }
+
+  openDialogAvatar(obj: any) {
+
+    console.log(obj);
+
+    const dialogRef = this.dialog.open(AvatarComponent, {data: obj, disableClose: true});
+
+    dialogRef.afterClosed()
+      .subscribe( result => {
+        
+        console.log('ha cerrado');
+        
+            
+      });
+  }
+
 
 }

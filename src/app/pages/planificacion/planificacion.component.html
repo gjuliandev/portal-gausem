@@ -68,12 +68,33 @@
       <div class="taskboard-wrapper b-r" *ngIf="planifica">
         <div class="taskboard-list todos">
           <div class="taskboard-header text-uppercase" >
-            <strong>Clientes a Planificar ( {{clientesCard.length}} )</strong>
+           
+            <strong>Clientes a Planificar ( {{clientesFiltering.length}} )</strong>
 
           </div>
+          <div fxLayout="row wrap">
+            <div fxFlex="100">
+              <mat-card>
+                <mat-card-content>
+                  <div fxLayout="row wrap" class="align-items-center">
+                    <div fxFlex.gt-md="60" fxFlex.gt-lg="60" fxFlex.gt-xl="100" fxFlex="100">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Cliente">
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex.gt-md="40" class="text-right">
+                      <mat-slide-toggle
+                        color="primary"
+                        (change)="toggleCoompleted($event)">Mostrar todos</mat-slide-toggle>
 
-          <div class="taskboard-cards" id="clientes" [cdkDropListData]="clientesCard" cdkDropList (cdkDropListDropped)="drop($event)"  >
-            <div class="taskboard-task" cdkDrag *ngFor="let cliente of clientesCard" [ngClass]="{ 'task-status-danger': cliente.restan <= 0 }">
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+          <div class="taskboard-cards" id="clientes" [cdkDropListData]="clientesFiltering" cdkDropList (cdkDropListDropped)="drop($event)"  >
+            <div class="taskboard-task" cdkDrag *ngFor="let cliente of clientesFiltering" [ngClass]="{ 'task-status-danger': cliente.restan <= 0 }">
               <div fxLayout="row" (dblclick)="mover(cliente)">
                 <div fxFlex="60" class="taskboard-task-title">
                   {{cliente.cliente_id}} - {{cliente.nombreComercial}}
@@ -121,8 +142,8 @@
                 <button class="btnRuta" mat-button  mat-flat-button color="warn" (click)="resetVisitas()" [disabled]="!ruta.visitas?.length > 0">RESET </button>
               </div>
               <div class="taskboard-wrapper center">
-                <button class="btnRuta" mat-button  mat-flat-button color="primary" (click)="guardarRuta()" [disabled]="!ruta.visitas?.length > 0"> GUARDAR RUTA </button>
-                <button class="btnRuta" mat-button  mat-flat-button color="primary" (click)="guardarRuta()" [disabled]="!ruta.visitas?.length > 0"> ACTUALIZAR RUTA </button>
+                <button class="btnRuta" mat-button  mat-flat-button color="primary" (click)="guardarRuta()"  *ngIf="isNew" [disabled]="!ruta.visitas?.length > 0"> GUARDAR RUTA </button>
+                <button class="btnRuta" mat-button  mat-flat-button color="primary" (click)="guardarRuta()"  *ngIf="!isNew"  [disabled]="!ruta.visitas?.length > 0"> ACTUALIZAR RUTA </button>
               </div>
             </div>
 

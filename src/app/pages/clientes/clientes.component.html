@@ -8,7 +8,13 @@
               <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Cliente">
             </mat-form-field>
           </div>
-          <div fxFlex.gt-md="75" class="text-right">
+          <div fxFlex.gt-md="20" class="text-left m-l-20" >
+            <mat-slide-toggle
+              color="primary"
+              (change)="toggleCoompleted($event)">Mostrar todos</mat-slide-toggle>
+
+          </div>
+          <div fxFlex.gt-md="50" class="text-right">
             <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Nuevo Cliente</button>
           </div>
         </div>
@@ -28,10 +34,10 @@
 
           <table mat-table [dataSource]="dataSource" class="table employee-list no-wrap" matSort>
             <!-- Img Column -->
-            <!-- <ng-container matColumnDef="logo">
+            <ng-container matColumnDef="logo">
               <th mat-header-cell *matHeaderCellDef> Logo </th>
-              <td mat-cell *matCellDef="let element"> <img [src]="element.logo | imagen:'logo'" width="50"/> </td>
-            </ng-container> -->
+              <td mat-cell *matCellDef="let element"> <img [src]="element.logo | imagen:'logos'" width="50"/> </td>
+            </ng-container>
             <!-- NombreComercial Column -->
             <ng-container matColumnDef="nombreComercial">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Comercial</th>

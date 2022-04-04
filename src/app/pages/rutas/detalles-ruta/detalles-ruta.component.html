@@ -60,7 +60,8 @@
                     <div class="timeline-heading">
                       <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
                         <div fxFlex.gt-sm="10" fxFlex.gt-xs="5" class="p-5">
-                          <h6 class="timeline-title orden">nº {{visita.orden + 1 }}</h6>
+                          <!-- <h6 class="timeline-title orden">nº {{visita.orden + 1 }}</h6> -->
+                          <img [src]="visita.logo | imagen:'logos'" width="75" alt="user">
                         </div>
                         <div fxFlex.gt-sm="75" fxFlex.gt-xs="50" class="p-20">
                           <h4 class="timeline-title"><strong>{{visita.nombreComercial}}</strong></h4>

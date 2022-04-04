@@ -16,10 +16,10 @@
   <!-- Card column -->
   <div fxFlex.gt-sm="30" fxFlex="100">
       <mat-card class="oh text-center little-profile">
-          <img mat-card-image src="assets/images/restaurants/profile.jpg" alt="Photo of a Shiba Inu">
+          <img mat-card-image [src]="cliente.logo | imagen:'logos'" alt="Photo of a Shiba Inu">
           <mat-card-content>
               <div class="pro-img">
-                  <img src="assets/images/users/veolacarta.jpg" width="75" alt="user">
+                  <img [src]="cliente.logo | imagen:'logos'" width="75" alt="user">
               </div>
 
               <h3 class="m-b-0">{{cliente.nombreComercial}}</h3>
@@ -155,11 +155,32 @@
                     <div class="wrap">
                       <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
                         
-                        <div class="m-r-20" >
-                          <img class="img-circle" width="200" [src]="cliente.img | imagen:'avatar'" alt="Image of {{cliente.nombreComercial}}">
-                        </div>
-                        
+                        <img class="img-circle" width="200" [src]="cliente.logo | imagen:'logos'" alt="Image of {{cliente.nombreComercial}}" 
+                          *ngIf="!croppedImage" (click)="fileInput.click()">
+                        <img class="img-circle" width="200" [src]="croppedImage" alt="Image of logo" *ngIf="croppedImage" (click)="fileInput.click()">
+                          
+                        <input #fileInput hidden type="file" (change)="fileChangeEvent($event)" />
                       </div>
+
+                      <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+                        <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="1 / 1"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded(cliente.img)"
+                        (cropperReady)="cropperReady()"
+                        (loadImageFailed)="loadImageFailed()"
+                        ></image-cropper>
+                      </div>
+
+                      <div fxLayout="row" fxLayoutAlign="center center" class="m-b-20">
+                        <mat-card-actions *ngIf="croppedImage" >
+                          <button mat-flat-button color="primary"  (click)="guardarLogo()">Guardar</button>
+                        </mat-card-actions>
+                      </div>
+                     
                     </div>
                   
               </mat-card-content>

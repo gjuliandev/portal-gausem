@@ -15,6 +15,8 @@ import { ListRutasComponent } from './rutas/list-rutas/list-rutas.component';
 import { DetallesRutaComponent } from './rutas/detalles-ruta/detalles-ruta.component';
 import { PlanificacionComponent } from './planificacion/planificacion.component';
 import { VisitaDialogComponent } from './rutas/visita-dialog/visita-dialog.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { AvatarComponent } from './usuarios/avatar/avatar.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { VisitaDialogComponent } from './rutas/visita-dialog/visita-dialog.compo
                   ListRutasComponent,
                   DetallesRutaComponent,
                   PlanificacionComponent,
-                  VisitaDialogComponent],
+                  VisitaDialogComponent,
+                  AvatarComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -35,6 +38,7 @@ import { VisitaDialogComponent } from './rutas/visita-dialog/visita-dialog.compo
     PipesModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule
   ]
 })
 export class PagesModule { }
