@@ -1,18 +1,19 @@
 
 
 export interface IVisita {
-  alias?:      string;
-  fecha:      string;
-  lat?:        number;
-  lng?:        number;
-  tipo?:       string;
-  bidones?:   number;
-  kilos?:     number;
-  entregado?: number;
-  nAlbaran?:  number;
-  cliente_id: number;
-  ruta_id:    number;
-  notas?:     string;
-  orden?:     number;
-  _id?:       number;
-}
+  alias?:         string;
+  fecha:          string;
+  lat?:           number;
+  lng?:           number;
+  tipo?:          string;
+  bidones?:       number;
+  kilos?:         number;
+  entregado?:     number;
+  nAlbaran?:      number;
+  cliente_id:     number;
+  ruta_id:        number;
+  notas?:         string;
+  observaciones?: string;
+  orden?:         number;
+  _id?:           number;
+} 

@@ -30,12 +30,21 @@ export class StarterComponent implements OnInit {
     this.dashboardResolver.onClientesChanged
     .pipe( takeUntil(this.unsubscribeAll) )
     .subscribe( (item: Array<any>) => {
-        let newItem: any = {
+        
+        let clientesTotales: any = {
           titulo: 'Clientes',
-          subtitulo: 'Activos',
+          subtitulo: 'Totales',
+          valor: item.length
+        } 
+        this.kpis.push(clientesTotales);
+
+        let clientesActivos: any = {
+          titulo: 'Clientes',
+          subtitulo: 'activos',
           valor: item.filter( x => x.abonado === 1).length
         }
-        this.kpis.push(newItem);
+        this.kpis.push(clientesActivos);
+
     });
 
     this.dashboardResolver.onVisitaChanged

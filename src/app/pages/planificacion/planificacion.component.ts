@@ -59,6 +59,10 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
   planifica: boolean = true; // Para mostrar los datos del tasckboard
 
   isNew=true;
+  isChanged = false;
+
+  // muestra el spinner
+  isLoading = false;
 
   // DATOS QUE VIENEN DEL OTRO FORMULARIO
   comercial: any = '';
@@ -128,6 +132,21 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
           this.clientesFiltering = this.clientesFiltering.filter( x => x.nombreComercial.toLocaleUpperCase().includes(query.toLocaleUpperCase()));
         }
 
+        if (this.isChanged) {
+          if (mostrarTodos) {
+            this.showAllClients = true;
+            this.isLoading = true;
+            this.findClientesAPlanificar();
+          } else {
+            this.isLoading = true;
+            this.showAllClients = false;            
+            this.findClientesAPlanificar();
+            
+          }
+          this.isChanged = false;
+        }
+        
+
       });
   }
 
@@ -146,7 +165,6 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
   }
 
   findClientesAPlanificar() {
-   
     this.clientesCard = [];
     this.clientesFiltering = [];
     this.fechaRuta = moment(this.fechaRuta).format('YYYY-MM-DD');
@@ -157,6 +175,9 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
         let result = this.clientesCard.findIndex(x => x._id === clientes[i]._id);
          if ( this.clientesCard.findIndex(x => x._id === clientes[i]._id) === -1 ) {
           this.addCliente(clientes[i]);
+          if (i === clientes.length - 1){
+            this.isLoading = false;
+          }
         } 
       }
     });
@@ -365,9 +386,10 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
   }
 
   toggleCoompleted( e: any ) {
+
+    this.isChanged = true;
     this.filters.mostrarTodo$.next(e.checked);
 
-    console.log(this.showAllClients, e.checked);
   }
 
   ngOnDestroy(): void {
