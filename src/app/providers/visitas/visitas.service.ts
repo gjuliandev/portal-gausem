@@ -58,6 +58,7 @@ export class VisitasService {
       cliente_id: visita.cliente_id,
       ruta_id:    visita.ruta_id,
       notas:      visita.notas,
+      isVisited:  visita.isVisited,
       orden:      visita.orden
     };
     return this.http.post(url, newVisita);
@@ -79,6 +80,7 @@ export class VisitasService {
       ruta_id:    visita.ruta_id,
       notas:      visita.notas,
       orden:      visita.orden,
+      isVisited:  visita.isVisited,
       _id:        visita._id
     }
     return this.http.put(url, updateVisita)

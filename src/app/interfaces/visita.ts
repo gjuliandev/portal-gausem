@@ -15,5 +15,6 @@ export interface IVisita {
   notas?:         string;
   observaciones?: string;
   orden?:         number;
+  isVisited?:     boolean;
   _id?:           number;
 } 

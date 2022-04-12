@@ -121,6 +121,7 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
               'Se ha añadido la dirección correctamente',
               'success'
             );
+            this.action = 'update';
           });
         break;
       default:
