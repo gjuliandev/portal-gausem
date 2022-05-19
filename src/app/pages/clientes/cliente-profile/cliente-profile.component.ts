@@ -115,7 +115,6 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
       case 'add':
         this.direccionesService.crearDireccion(newDireccion)
           .subscribe( res => {
-            console.log(res);
             Swal.fire(
               'Dirección Añadida',
               'Se ha añadido la dirección correctamente',
@@ -195,7 +194,13 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   guardarLogo() {
     if (this.file) {
       this.subirFicheroService.upload(this.file, 'logo', this.cliente._id)
-        .then( x=> console.log('subido') );
+        .then( x=> { 
+          Swal.fire(
+            'Acutalización Logo',
+            'El logo se ha actualizado correctamente.',
+            'success'
+          );
+        });
     }
   }
 

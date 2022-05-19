@@ -4,10 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import * as Chartist from 'chartist';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { ClientesService } from 'src/app/providers/clientes/clientes.service';
 import { ClienteDialogComponent } from './cliente-dialog/cliente-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-clientes',
@@ -69,21 +69,36 @@ export class ClientesComponent implements OnInit {
             this.clienteService.crearCliente(result.data)
               .subscribe(res =>  {
                 this.isLoaing = true;
-                this.findAllClientes()
+                this.findAllClientes();
+                Swal.fire(
+                  'Nuevo Cliente',
+                  'El cliente ha sido creado correctamente',
+                  'success'
+                );
               });
             break;
           case 'Update':
             this.clienteService.updateCliente(result.data)
               .subscribe(res =>  {
                 this.isLoaing = true;
-                this.findAllClientes()
+                this.findAllClientes();
+                Swal.fire(
+                  'Edición Cliente',
+                  'El cliente ha sido actualizado correctamente',
+                  'success'
+                );
               });
             break;
           case 'Delete':
             this.clienteService.deleteCliente(result.data)
               .subscribe(res =>  {
                 this.isLoaing = true;
-                this.findAllClientes()
+                this.findAllClientes();
+                Swal.fire(
+                  'Eliminar Cliente',
+                  'El cliente ha sido eliminado correctamente',
+                  'success'
+                );
               });
             break;
           default:

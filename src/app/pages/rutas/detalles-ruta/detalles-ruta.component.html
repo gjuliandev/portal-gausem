@@ -9,20 +9,23 @@
 
       <div fxLayout="row" fxLayoutAlign="start center">
 
-        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-10">
           <i class="fa fa-clock-o p-10"></i><strong>{{ruta.fecha | date: 'mediumDate'}}</strong>
         </div>
 
-        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-10">
           <i class="fa fa-hourglass-start p-10"></i><strong>{{ ruta.inicio | date: 'shortTime'}} horas</strong>
         </div>
 
-        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+        <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-10">
           <i class="fa fa-hourglass-end p-10"></i><strong>{{ ruta.fin | date: 'shortTime'}} horas</strong>
         </div>
 
         <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
           <i class="fa fa-hourglass-o p-10"></i>Duración <strong>{{ ruta.duracion | horasFromMinutes }}</strong>
+        </div>
+        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
+         Numero de Lote
         </div>
       </div>
     </mat-card-content>

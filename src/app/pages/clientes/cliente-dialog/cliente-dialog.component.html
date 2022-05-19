@@ -67,7 +67,10 @@
           <div fxFlex.gt-lg="18" fxFlex="100">
             <mat-form-field appearance="outline">
               <mat-label>Abonado</mat-label>
-              <input matInput type="text" placeholder="Abonado" formControlName="abonado">
+              <select matNativeControl required formControlName="abonado">
+                <option value="1">SI</option>
+                <option value="0">NO</option>
+              </select>
             </mat-form-field>
           </div>
 
@@ -98,15 +101,6 @@
             </mat-form-field>
           </div>
 
-          <!-- col half próxima visita-->
-          <div fxFlex.gt-lg="18" fxFlex="20">
-            <mat-form-field appearance="outline">
-              <mat-label>Fecha Próxima Visita</mat-label>
-              <input matInput formControlName="proxima_visita"  [matDatepicker]="proximaVisita">
-              <mat-datepicker-toggle matSuffix [for]="proximaVisita"></mat-datepicker-toggle>
-              <mat-datepicker #proximaVisita></mat-datepicker>
-            </mat-form-field>
-          </div>
 
           <!-- col half IBAN-->
           <div fxFlex.gt-lg="100" fxFlex="100">

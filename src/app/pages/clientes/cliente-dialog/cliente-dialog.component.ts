@@ -33,7 +33,7 @@ export class ClienteDialogComponent {
                   consumo: [this.local_data.consumo],
                   fecha_alta: [this.local_data.fecha_alta, Validators.required],
                   renovacion_certificado: [this.local_data.renovacion_certificado],
-                  proxima_visita: [this.local_data.proxima_visita]
+                  
                 });
                 
               }

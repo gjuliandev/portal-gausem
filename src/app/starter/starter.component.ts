@@ -67,7 +67,7 @@ export class StarterComponent implements OnInit {
     this.kpis.push (kpiKilos);
 
     let kpiVikpiEntregado = {
-      titulo: 'Total Entregado',
+      titulo: '€ Total Entregado',
       subtitulo: moment().format('YYYY'),
       valor: this.getSumEntregado()
     }

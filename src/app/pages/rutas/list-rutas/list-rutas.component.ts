@@ -46,7 +46,6 @@ export class ListRutasComponent implements OnInit {
   }
 
   editarRuta(ruta: IRuta) {
-    console.log('RUTA A EDITAR ' + JSON.stringify(ruta));
     const navigationExtras: NavigationExtras = {
       state: {
         fecha: ruta.fecha,

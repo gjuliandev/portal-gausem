@@ -16,6 +16,8 @@ export class KilosxmesComponent implements OnInit {
 
   chartData: Array<any> = [];
   categories: Array<any> = [];
+
+  anio = new Date().getFullYear();
   
   constructor( private dashboardService: DashboardService ) { }
 
@@ -24,7 +26,7 @@ export class KilosxmesComponent implements OnInit {
   }
 
   getKilosMes() {
-    this.dashboardService.getKilosMes(2022)
+    this.dashboardService.getKilosMes(this.anio)
       .subscribe( (resp: any) =>  {
         if (resp) {
           this.cargarDatos(resp).
@@ -40,8 +42,8 @@ export class KilosxmesComponent implements OnInit {
     this.categories = [];
     return new Promise( ( resolve, reject) => {
       Highcharts.objectEach(resp, (value, property) => {
-        this.chartData.push( [+property, value.kilos, 'MARZO' ]);
-        this.categories.push(moment(value.fecha).format('DD-MM'))
+        this.chartData.push( [+property, value.kilos ]);
+        this.categories.push(value.mes)
       });
       resolve(true);
     });
@@ -54,7 +56,7 @@ export class KilosxmesComponent implements OnInit {
       },
 
       title: { 
-        text: 'Kilos recogidos por mes' 
+        text: 'Kilos recogidos por mes en el año ' + this.anio 
       },
       legend: {
         enabled: false
