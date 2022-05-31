@@ -1,11 +1,17 @@
 @import '../../../../assets/styles/variable.scss';
 
+mat-card {
+  width: 100%;
+}
 mat-card-header {
+  display: flex;
+  justify-content: space-between;
     padding: 10;
     text-align: center;
     font-size: 24px;
     color: #fff;
     background: #009688;
+    width: 100%;
 }
 
 .white {
@@ -14,6 +20,11 @@ mat-card-header {
 }
 mat-card-content {
   font-size: 1em !important;
+}
+
+.text-right {
+  display: flex;
+ align-items: right;
 }
 
 .left {
@@ -28,7 +39,6 @@ mat-card-content {
 .right {
   overflow: hidden;
   padding: 20px;
-
 }
 
 .orden {

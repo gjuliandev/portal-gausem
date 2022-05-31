@@ -27,7 +27,7 @@
           <!-- Row -->
           <div class="ruta-header">
 
-              <div class="header" [ngClass]="{'color-header-orange': ruta.estado == 0, 'color-header-green': ruta.estado == 1}">
+              <div class="header" [ngClass]="{'color-header-orange': ruta.estado == 0, 'color-header-blue': ruta.estado == 1, 'color-header-green': ruta.estado == 2, 'color-header-red': ruta.estado == 3, 'color-header-dark': ruta.estado == 4}">
                 <div fxLayout="row" fxLayout="wrap">
                   <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-10 b-r" >
                     <img [src]="ruta.img | imagen:'avatar'" width="50" class="avatar"/>
@@ -66,9 +66,9 @@
 
           </div>
           <mat-card-actions class="btn-action">
-            <button mat-stroked-button color="primary"  (click)="verDetalles(ruta)" [disabled]="ruta.estado === 0|| ruta.estado === 3">Ver Ruta</button>
-            <button mat-stroked-button color="accent"   (click)="editarRuta(ruta)">Editar  </button>
-            <button mat-stroked-button color="warn"     (click)="eliminarRuta(ruta)">Eliminar</button>
+            <button mat-stroked-button color="primary" (click)="verDetalles(ruta)" [disabled]="ruta.estado === 0|| ruta.estado === 3">Ver Ruta</button>
+            <button mat-stroked-button color="accent"  (click)="editarRuta(ruta)"  [disabled]="ruta.estado === 3|| ruta.estado === 4">Editar  </button>
+            <button mat-stroked-button color="warn"    (click)="eliminarRuta(ruta)">Eliminar</button>
           </mat-card-actions>
       </mat-card>
   </div>

@@ -21,7 +21,7 @@
               </mat-form-field>
             </div>
 
-            <div fxFlex.gt-sm="33" fxFlex.gt-xs="50" fxFlex="50">
+            <div fxFlex.gt-lg="30" fxFlex="100">
               <mat-form-field>
                 <mat-label>Selecciona Comercial</mat-label>
                 <mat-select placeholder="Comercial" formControlName="comercial">
@@ -31,15 +31,22 @@
                 </mat-select>
               </mat-form-field>
             </div>
-          </div>
-            <button mat-button type="submit" mat-flat-button color="primary"
-              [disabled]="!rutaForm.valid"> Abrir Ruta
-            </button>
-          </form>
-          
-        </mat-card-content>
-      </mat-card>
 
+            <div fxFlex.gt-lg="30" fxFlex="100">
+              <button mat-button type="submit" mat-flat-button color="primary" [disabled]="!rutaForm.valid"> Abrir Ruta
+              </button>
+            </div>
+          </div>
+          </form>
+          <div fxLayout="row" fxLayoutGap="30px" *ngIf="planifica">
+            <div  fxFlex="100" >
+              <app-text  #editor [observaciones]="observaciones" (guardarClicked)="observacionActualizada($event)"></app-text>
+            </div>
+          </div>
+        </mat-card-content>
+       
+      </mat-card>
+      
       <!-- FILTROS -->
       <!-- <div class="filtro-wrapper">
         <p>Filtrar Clientes:</p>
@@ -129,22 +136,22 @@
 
 
       <!-- RUTAS -->
-      <div class="taskboard-wrapper" *ngIf="planifica">
+      <div class="taskboard-wrapper b-r" *ngIf="planifica">
         <div class="taskboard-list completed">
           <div class="taskboard-header text-uppercase" >
             <strong> Planificación del día  {{ruta.fecha | date: 'fullDate'}}</strong>
           </div>
           <div class="taskboard-cards" id="route" #route [cdkDropListData]="ruta.visitas" cdkDropList (cdkDropListDropped)="drop($event)">
             <div class="taskboard-task b-b" cdkDrag *ngFor="let visita of ruta.visitas; index as i; ">
-
-              <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}} <span *ngIf="!visita.persistente">**</span></div>
-
-              <div>
-                <span class=" task-decription text-muted">
-                  {{visita.domicilio }} - {{visita.poblacion}}
-                </span>
+              <div fxLayout="row">
+                  <div class="taskboard-task-title"> {{i + 1}} - {{ visita.nombreComercial}} <span *ngIf="!visita.persistente">**</span></div>
+                  <div>
+                    <span class=" task-decription text-muted">
+                      {{visita.domicilio }} - {{visita.poblacion}}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
             <div fxLayout="row" fxLayoutAlign="space-around center" >
               <div class="taskboard-wrapper center">
                 <button class="btnRuta" mat-button  mat-flat-button color="warn" (click)="resetVisitas()" [disabled]="!ruta.visitas?.length > 0">RESET </button>
@@ -158,8 +165,11 @@
           </div>
         </div>
       </div>
+      <!-- FIN RUTAS -->
 
+     
     </div>
   </mat-card-content>
 
+ 
 </mat-card>

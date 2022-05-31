@@ -20,6 +20,9 @@ export class EstadoRutaPipe implements PipeTransform {
       case 3:
         estado = 'CANCELADA';
         break;
+      case 4:
+        estado = 'REVISADA';
+        break;
       default:
         break;
     }

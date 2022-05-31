@@ -24,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PlanificacionComponent implements OnInit, OnDestroy{
 
+  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -53,14 +54,14 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
   clientesCard: Array<any> = []; // Para el taskboard de clientes
   visitasCard:  Array<any> = []; // Para el taskboard de visitas
 
-  ruta:      IRuta =  Object.create(null);
+  ruta: IRuta =  Object.create(null);
+  observaciones: string = 'no hay observaciones';
   rutaForm:  FormGroup = Object.create(null);
   fechaRuta: any;
-  planifica: boolean = true; // Para mostrar los datos del tasckboard
+  planifica: boolean = false; // Para mostrar los datos del tasckboard
 
   isNew=true;
   isChanged = false;
-
   // muestra el spinner
   isLoading = false;
 
@@ -264,7 +265,9 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
           }).then((result) => {
             if (result.isConfirmed){
               this.ruta = ruta; // Asignamos la ruta que nos devuelve la base de datos
+              this.observaciones = ruta.observaciones || 'no hay observaciones';
               this.isNew = false;
+              
               this.cargarVisitasRuta();
             }
           });
@@ -390,6 +393,15 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
     this.isChanged = true;
     this.filters.mostrarTodo$.next(e.checked);
 
+  }
+
+  observacionActualizada(observaciones: string) {
+  
+    this.ruta.observaciones = observaciones;
+    this.rutaService.actualizarObservaciones(this.ruta)
+      .subscribe( resp => this.snackBar.open('Observaciones actualizadas...' ,'',  {
+        duration: 2000}
+        ))
   }
 
   ngOnDestroy(): void {

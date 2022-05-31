@@ -83,7 +83,21 @@ export class RutasService {
 
   eliminarRuta( ruta: IRuta ) {
     const url = `${environment.base_url}/rutas/${ruta._id}`;
-    console.log('vamos a eliminar la ruta');
     return this.http.delete(url);
+  }
+
+  actualizarLote( ruta: IRuta) {
+    const url = `${environment.base_url}/lote/${ruta._id}`;
+    return this.http.put(url, ruta);
+  }
+
+  marcarRevisada(ruta: IRuta) {
+    const url = `${environment.base_url}/rutas/marcar-revisada`;
+    return this.http.put(url, ruta);
+  }
+
+  actualizarObservaciones( ruta: IRuta ){
+    const url = `${environment.base_url}/rutas/actualizaObservaciones`;
+    return this.http.put(url, ruta);
   }
 }

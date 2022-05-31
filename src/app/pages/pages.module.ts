@@ -17,6 +17,7 @@ import { PlanificacionComponent } from './planificacion/planificacion.component'
 import { VisitaDialogComponent } from './rutas/visita-dialog/visita-dialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AvatarComponent } from './usuarios/avatar/avatar.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AvatarComponent } from './usuarios/avatar/avatar.component';
     PipesModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    ComponentsModule
   ]
 })
 export class PagesModule { }

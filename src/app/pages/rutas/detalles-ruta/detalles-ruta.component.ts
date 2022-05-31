@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { IVisita } from 'src/app/interfaces/visita';
+import { RutasService } from 'src/app/providers/rutas/rutas.service';
 import { VisitasService } from 'src/app/providers/visitas/visitas.service';
 import { RutasResolver } from 'src/app/resolvers/rutas.resolver';
 import { VisitaDialogComponent } from '../visita-dialog/visita-dialog.component';
@@ -19,8 +22,14 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
   isLoaing = true;
   hayDatos = true;
   private unsubscribeAll: Subject<any> = new Subject();
+  loteForm: FormGroup = Object.create(null);
 
-  constructor( private rutaResolver: RutasResolver, private dialog: MatDialog, private visitasService: VisitasService) { }
+  constructor( private rutaResolver: RutasResolver, 
+        private dialog: MatDialog, 
+        private visitasService: VisitasService, 
+        private fb: FormBuilder, 
+        private rutasService: RutasService,
+        private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     
@@ -28,13 +37,16 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
     .pipe( takeUntil(this.unsubscribeAll) )
     .subscribe( resp => {
       this.ruta = resp
-      console.log(resp);
     });
 
-  this.rutaResolver.onVisitaChanged
+    this.rutaResolver.onVisitaChanged
     .pipe( takeUntil(this.unsubscribeAll) )
     .subscribe( visitas => {
       this.visitas = visitas
+    });
+
+    this.loteForm = this.fb.group({
+      lote:[this.ruta.lote]
     });
   }
 
@@ -79,6 +91,21 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
             break;
         }
       });
+  }
+
+  actualizarLote() {
+    this.ruta.lote = this.loteForm.value.lote;
+    this.rutasService.actualizarLote(this.ruta)
+      .subscribe( resp => this._snackBar.open('Lote acualizado' ,'',  {
+        duration: 2000}
+        ));
+  }
+
+  revisar() {
+    this.rutasService.marcarRevisada(this.ruta._id)
+      .subscribe(resp => this._snackBar.open('Ruta revisada correctamente' ,'',  {
+        duration: 2000}
+        ));
   }
 
   ngOnDestroy(): void {

@@ -24,8 +24,19 @@
         <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
           <i class="fa fa-hourglass-o p-10"></i>Duración <strong>{{ ruta.duracion | horasFromMinutes }}</strong>
         </div>
-        <div fxFlex.gt-sm="25" fxFlex.gt-xs="25" class="p-10">
-         Numero de Lote
+        <div fxFlex.gt-sm="35" fxFlex.gt-xs="35" class="p-10">
+          <form [formGroup]="loteForm" (ngSubmit)="actualizarLote()">
+            <mat-grid-list cols="2" rowHeight="100px">
+              <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                <mat-label>Nº Lote</mat-label>
+                <input matInput type="text" placeholder="Introduzcal el numero de lote" formControlName="lote">
+              </mat-form-field></mat-grid-tile>
+              <mat-grid-tile>
+                <button mat-raised-button type="submit" >Actualizar Lote</button>
+              </mat-grid-tile>  
+            </mat-grid-list>
+          </form>
         </div>
       </div>
     </mat-card-content>
@@ -34,8 +45,9 @@
 <div>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Visitas realizadas ({{visitas.length}})</mat-card-title>
-      <mat-card-subtitle class="white">Kilos recogidos: <strong>{{ getSumKilos() }} Kilos </strong> Total (€) entregados: <strong>{{ getSumEntregado() }}€</strong></mat-card-subtitle>
+        <mat-card-title>Visitas realizadas ({{visitas.length}})</mat-card-title>
+        <mat-card-subtitle class="white">Kilos recogidos: <strong>{{ getSumKilos() | number }} Kilos </strong> Total (€) entregados: <strong>{{ getSumEntregado() | number }}€</strong></mat-card-subtitle>
+        <button mat-raised-button (click)="revisar()">Validar Ruta</button>  
     </mat-card-header>
     <mat-card-content>
         <ul class="timeline" *ngFor="let visita of visitas">

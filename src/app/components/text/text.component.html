@@ -1,0 +1,17 @@
+<div class="row">
+  
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">Observaciones de la ruta</h5> 
+        <form [formGroup]="formQuill">
+        <quill-editor #editor [modules]="modulesBubble" [placeholder]="'Escriba aquí...'" (onEditorChanged)="mostrar($event)" formControlName="richEditor"></quill-editor>
+      </form>
+      </div>
+    </div>
+</div>
+<div class="row m-t-10">
+  <button mat-button  mat-flat-button color="primary" (click)="guardar($event )"> guardar observaciones </button>
+</div>  
+      
+
+
