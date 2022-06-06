@@ -50,8 +50,8 @@
         <button mat-raised-button (click)="revisar()">Validar Ruta</button>  
     </mat-card-header>
     <mat-card-content>
-        <ul class="timeline" *ngFor="let visita of visitas">
-            <li [ngClass]="{ 'timeline-inverted': visita.orden % 2 === 0 }">
+        <ul class="timeline" *ngFor="let visita of visitas; let i = index">
+            <li [ngClass]="{ 'timeline-inverted': i % 2 === 0 }">
                 <div class="timeline-badge success">
                     <img class="img-responsive" alt="user" [src]="ruta.img | imagen: 'avatar'" >
                 </div>
@@ -67,7 +67,7 @@
                           <h4 class="timeline-title"><strong>{{visita.nombreComercial}}</strong></h4>
                         </div>
                         <div fxFlex.gt-sm="15" fxFlex.gt-xs="15" class="p-5" *ngIf="visita.isVisited">
-                          <small class="text-muted">
+                          <small class="text-muted" *ngIf="visita.isVisited">
                               <i class="fa fa-clock-o"></i> <strong>{{visita.fecha | date: 'shortTime'}}</strong>
                           </small>
                         </div>

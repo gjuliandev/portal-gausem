@@ -87,12 +87,14 @@ export class RutasService {
   }
 
   actualizarLote( ruta: IRuta) {
-    const url = `${environment.base_url}/lote/${ruta._id}`;
+    const url = `${environment.base_url}/rutas/lote/`;
     return this.http.put(url, ruta);
   }
 
   marcarRevisada(ruta: IRuta) {
+    console.log(ruta);
     const url = `${environment.base_url}/rutas/marcar-revisada`;
+    console.log(url);
     return this.http.put(url, ruta);
   }
 

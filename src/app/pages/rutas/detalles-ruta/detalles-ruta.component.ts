@@ -102,7 +102,7 @@ export class DetallesRutaComponent implements OnInit, OnDestroy {
   }
 
   revisar() {
-    this.rutasService.marcarRevisada(this.ruta._id)
+    this.rutasService.marcarRevisada(this.ruta)
       .subscribe(resp => this._snackBar.open('Ruta revisada correctamente' ,'',  {
         duration: 2000}
         ));

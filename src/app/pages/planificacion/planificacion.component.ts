@@ -291,7 +291,7 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
               }
               this.abrirRuta('add');
             }
-          });
+          }); 
         }
       });
   }
@@ -335,17 +335,21 @@ export class PlanificacionComponent implements OnInit, OnDestroy{
 
           for (let i = 0; i < this.ruta.visitas.length; i ++) {
 
-            this.ruta.visitas[i].orden = i;
+            if (!this.ruta.visitas[i].isVisited ) { 
+             
+              this.ruta.visitas[i].orden = i;
 
-            let visita: IVisita = {
-              fecha: this.ruta.fecha,
-              tipo: 'RECOGIDA',
-              cliente_id: this.ruta.visitas[i].cliente_id,
-              orden: i,
-              ruta_id: this.ruta._id || 0
-            }
-            this.visitasService.crearVisita(this.ruta.visitas[i])
-              .subscribe();
+              let visita: IVisita = {
+                fecha: this.ruta.fecha,
+                tipo: 'RECOGIDA',
+                cliente_id: this.ruta.visitas[i].cliente_id,
+                orden: i,
+                ruta_id: this.ruta._id || 0
+              }
+              this.visitasService.crearVisita(this.ruta.visitas[i])
+                .subscribe();
+          
+            } // si la visita ya se ha realizado no se puede eliminar, porque se ha actualizado desde la aplicación móvil
 
             if (i == this.ruta.visitas.length - 1) {
               this.snackBar.open('Se ha guardado la planificación de la ruta correctamente', 'Guardar Visitas',       { duration: 2000 });
