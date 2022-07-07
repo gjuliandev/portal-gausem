@@ -47,7 +47,6 @@ export class ClienteResolver implements Resolve<boolean> {
     });
   }
 
-
   findAddress(id: number) {
     return new Promise( (resolve, reject) => {
       this.direccionesService.getDireccion(id)

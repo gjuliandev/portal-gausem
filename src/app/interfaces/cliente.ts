@@ -1,3 +1,4 @@
+
 export interface ICliente {
   nombreComercial?:        string;
   nombreFiscal?:           string;
@@ -14,5 +15,6 @@ export interface ICliente {
   proxima_visita?:         Date;
   _id?:                   string;
   logo?:                  string;
-  persistente?:            string;
+  persistente?:           string;
+  usuario_id?:            number;
 }

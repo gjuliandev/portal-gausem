@@ -4,7 +4,7 @@
       Detalles del Cliente
     </mat-card-title>
     <mat-card-subtitle>
-      #{{cliente._id}} - {{cliente.nombreComercial}}
+      #{{cliente._id}} - {{cliente.nombreComercial}} 
     </mat-card-subtitle>
   </mat-card-header>
 </mat-card>
@@ -25,6 +25,7 @@
               <h3 class="m-b-0">{{cliente.nombreComercial}}</h3>
               <h6 class="m-t-0 m-b-0">{{direccion.domicilio}}</h6>
               <h6 class="m-t-0">{{direccion.codPostal}} {{direccion.provincia }}</h6>
+              <h3 *ngIf="cliente.usuario"><small>Captado por:</small> {{cliente.usuario}}</h3>
 
               <mat-card-actions *ngIf="cliente.abonado">
                   <button mat-raised-button color="warn" (click)="desactivar()">Desactivar</button>

@@ -76,15 +76,21 @@
             </ng-container>
 
             <!-- Renovacion Certificado Column -->
-            <ng-container matColumnDef="renovacion_certificado">
+            <!-- <ng-container matColumnDef="renovacion_certificado">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Renovación Certificado </th>
               <td mat-cell *matCellDef="let element">{{element.renovacion_certificado | date: 'mediumDate'}}</td>
-            </ng-container>
+            </ng-container> -->
 
-             <!-- Próxima Revisión Column -->
+             <!-- Próxima visita Column -->
              <ng-container matColumnDef="proxima_visita">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Próxima Visita </th>
               <td mat-cell *matCellDef="let element">{{element.proxima_visita | date: 'mediumDate'}}</td>
+            </ng-container>
+
+            <!-- usuario captador  Column -->
+            <ng-container matColumnDef="usuario">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Captado por </th>
+              <td mat-cell *matCellDef="let element">{{element.usuario}}</td>
             </ng-container>
 
             <!-- Action Column -->

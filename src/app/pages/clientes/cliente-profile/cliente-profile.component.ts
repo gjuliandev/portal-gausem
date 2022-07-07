@@ -42,7 +42,9 @@ export class ClienteProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       this.clienteResolver.onClienteChanged
         .pipe( takeUntil(this.unsubscribeAll) )
-        .subscribe( (item: any) => this.cliente = item
+        .subscribe( (item: any) => {
+          this.cliente = item;
+          console.log(JSON.stringify(this.cliente))}
       );
 
       this.clienteResolver.onAddressChanged

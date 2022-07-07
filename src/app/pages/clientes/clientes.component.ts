@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 export class ClientesComponent implements OnInit {
 
   dataSource = new MatTableDataSource([]);
-  displayedColumns = ['logo',  'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'renovacion_certificado', 'proxima_visita', 'action']
+  displayedColumns = ['logo',  'nombreComercial', 'cif', 'abonado', 'cantidad_abonada', 'periodicidad', 'consumo', 'proxima_visita', 'usuario', 'action']
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator = Object.create(null);
   @ViewChild(MatSort, { static: true }) sort: MatSort = Object.create(null);
   isLoaing = true;

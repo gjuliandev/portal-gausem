@@ -48,7 +48,8 @@ export class ClientesService {
       periodicidad:           cliente.periodicidad,
       consumo:                cliente.consumo,
       fecha_alta:             moment(cliente.fecha_alta).format('YYYY-MM-DD'),
-      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD')
+      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD'),
+      usuario_id:             cliente.usuario_id
 
     };
     return this.http.post(url, newClient);
@@ -69,7 +70,8 @@ export class ClientesService {
       periodicidad:           cliente.periodicidad,
       consumo:                cliente.consumo,
       fecha_alta:             moment(cliente.fecha_alta).format('YYYY-MM-DD'),
-      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD')
+      renovacion_certificado: moment(cliente.renovacion_certificado).format('YYYY-MM-DD'),
+      usuario_id:             cliente.usuario_id
     }
     return this.http.put(url, updateClient);
   }
